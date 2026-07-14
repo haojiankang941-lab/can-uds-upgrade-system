@@ -1,0 +1,73 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: ¦ÌVision V5.26.2.0
+Copyright (C) 2018 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: li lili, lilili, LIC=IK1BF-6DQKD-VEZHA-1PZIF-Z7PGU-6KR4U
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Plus  Version: 5.26.2.0
+Toolchain Path:  E:\MDK_keil5\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.06 update 6 (build 750)
+Assembler:       Armasm.exe V5.06 update 6 (build 750)
+Linker/Locator:  ArmLink.exe V5.06 update 6 (build 750)
+Library Manager: ArmAr.exe V5.06 update 6 (build 750)
+Hex Converter:   FromElf.exe V5.06 update 6 (build 750)
+CPU DLL:         SARMCM3.DLL V5.26.2.0
+Dialog DLL:      DARMCM1.DLL V1.19.1.0
+Target DLL:      UL2CM3.DLL V1.161.6.0
+Dialog DLL:      TARMCM1.DLL V1.14.0.0
+ 
+<h2>Project:</h2>
+C:\Users\li\Desktop\W7901 FPGA\WDT\Test.uvprojx
+Project File Date:  08/18/2022
+
+<h2>Output:</h2>
+*** Using Compiler 'V5.06 update 6 (build 750)', folder: 'E:\MDK_keil5\ARM\ARMCC\Bin'
+Build target 'Target 1'
+Clean started - Project: 'Test'
+   deleting intermediate output files for target 'Target 1'
+compiling main.C...
+C\main.C(35): warning:  #128-D: loop is not reachable
+        while(1)
+C\main.C: 1 warning, 0 errors
+compiling Uart.c...
+assembling startup_sc32f10xx .s...
+compiling SC32F10xx_gpio.c...
+compiling SC32F10xx_rcc.c...
+linking...
+Program Size: Code=268 RO-data=208 RW-data=0 ZI-data=1024  
+".\Objects\Test.axf" - 0 Error(s), 1 Warning(s).
+
+*** Performing Cross-Module-Optimization:
+compiling main.C...
+C\main.C(35): warning:  #128-D: loop is not reachable
+        while(1)
+C\main.C: 1 warning, 0 errors
+compiling Uart.c...
+compiling SC32F10xx_gpio.c...
+compiling SC32F10xx_rcc.c...
+linking...
+Program Size: Code=268 RO-data=208 RW-data=0 ZI-data=1024  
+FromELF: creating hex file...
+".\Objects\Test.axf" - 0 Error(s), 1 Warning(s).
+*** Completed Cross-Module-Optimization after 2 iteration(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                http://www.keil.com/pack/ARM.CMSIS.5.4.0.pack
+                ARM.CMSIS.5.4.0
+                CMSIS (Cortex Microcontroller Software Interface Standard)
+
+<h2>Collection of Component include folders:</h2>
+  .\RTE\_Target_1
+  E:\MDK_keil5\ARM\PACK\ARM\CMSIS\5.4.0\Device\ARM\ARMCM0plus\Include
+
+<h2>Collection of Component Files used:</h2>
+Build Time Elapsed:  00:00:02
+</pre>
+</body>
+</html>

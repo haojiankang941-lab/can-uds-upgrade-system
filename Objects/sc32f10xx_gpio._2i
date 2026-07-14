@@ -1,0 +1,4 @@
+--c99 -c --cpu Cortex-M0+ -D__MICROLIB --li -g -O0 --apcs=interwork --split_sections -I .\H -I .\CMSIS -I ..\W7901 -I .\Driver\inc
+-ID:\KEIL5\ARM\CMSIS\5.8.0\Device\ARM\ARMCM0plus\Include
+-D__UVISION_VERSION="538" -DARMCM0P
+-o .\objects\sc32f10xx_gpio.o --omf_browse .\objects\sc32f10xx_gpio.crf --depend .\objects\sc32f10xx_gpio.d --feedback ".\Objects\WDT_Test.fed" "Driver\src\SC32F10xx_gpio.c"

@@ -1,0 +1,6 @@
+1.修改SPI0中RXNEIF (原先为 RINEIF)
+2.修改SPI0中TXHIF   (原先少写了个F)
+3.修改SPI1中WCOL   (原先语句写错，写成了SPI1_STS_RENEIF)
+4.修改DMA中 TXWIDTH （原先多了个E:  TXWODTHE）
+5.修改UART中 UART_IDE _RXIE中引用  （原先Pos和Msk写错）
+6.修改SPI1中 SPI1_CON_SPR_Msk       （原先SPI1_CON_SPR少了Msk）

@@ -1,0 +1,9 @@
+.\objects\sc32f10xx_gpio.o: Driver\src\SC32F10xx_gpio.c
+.\objects\sc32f10xx_gpio.o: .\Driver\inc\SC32F10xx_gpio.h
+.\objects\sc32f10xx_gpio.o: .\H\W1251.h
+.\objects\sc32f10xx_gpio.o: .\CMSIS\core_cm0plus.h
+.\objects\sc32f10xx_gpio.o: D:\KEIL5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\sc32f10xx_gpio.o: .\CMSIS\cmsis_version.h
+.\objects\sc32f10xx_gpio.o: .\CMSIS\cmsis_compiler.h
+.\objects\sc32f10xx_gpio.o: .\CMSIS\cmsis_armcc.h
+.\objects\sc32f10xx_gpio.o: .\CMSIS\mpu_armv7.h

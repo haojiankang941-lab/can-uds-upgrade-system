@@ -1,0 +1,331 @@
+Component: ARM Compiler 5.06 update 6 (build 750) Tool: armlink [4d35ed]
+
+==============================================================================
+
+Section Cross References
+
+    main.o(i.SystemClock_Config) refers to sc32f10xx_rcc.o(i.RCC_SYSCLKSWConfig) for RCC_SYSCLKSWConfig
+    main.o(i.SystemClock_Config) refers to sc32f10xx_rcc.o(i.RCC_HIRCCmd) for RCC_HIRCCmd
+    main.o(i.SystemClock_Config) refers to sc32f10xx_rcc.o(i.RCC_HCLKConfig) for RCC_HCLKConfig
+    main.o(i.main) refers to main.o(i.SystemClock_Config) for SystemClock_Config
+    startup_sc32f10xx .o(RESET) refers to startup_sc32f10xx .o(STACK) for __initial_sp
+    startup_sc32f10xx .o(RESET) refers to startup_sc32f10xx .o(.text) for Reset_Handler
+    startup_sc32f10xx .o(.text) refers to main.o(i.SystemInit) for SystemInit
+    startup_sc32f10xx .o(.text) refers to entry.o(.ARM.Collect$$$$00000000) for __main
+    sc32f10xx_gpio.o(i.GPIO_WriteBit) refers to sc32f10xx_gpio.o(i.GPIO_ResetBits) for GPIO_ResetBits
+    sc32f10xx_gpio.o(i.GPIO_WriteBit) refers to sc32f10xx_gpio.o(i.GPIO_SetBits) for GPIO_SetBits
+    entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry10a.o(.ARM.Collect$$$$0000000D) for __rt_final_cpp
+    entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry11a.o(.ARM.Collect$$$$0000000F) for __rt_final_exit
+    entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry7b.o(.ARM.Collect$$$$00000008) for _main_clock
+    entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry8b.o(.ARM.Collect$$$$0000000A) for _main_cpp_init
+    entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry9a.o(.ARM.Collect$$$$0000000B) for _main_init
+    entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry5.o(.ARM.Collect$$$$00000004) for _main_scatterload
+    entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry2.o(.ARM.Collect$$$$00000001) for _main_stk
+    entry2.o(.ARM.Collect$$$$00000001) refers to entry2.o(.ARM.Collect$$$$00002712) for __lit__00000000
+    entry2.o(.ARM.Collect$$$$00002712) refers to startup_sc32f10xx .o(STACK) for __initial_sp
+    entry2.o(__vectab_stack_and_reset_area) refers to startup_sc32f10xx .o(STACK) for __initial_sp
+    entry2.o(__vectab_stack_and_reset_area) refers to entry.o(.ARM.Collect$$$$00000000) for __main
+    entry5.o(.ARM.Collect$$$$00000004) refers to init.o(.text) for __scatterload
+    entry9a.o(.ARM.Collect$$$$0000000B) refers to main.o(i.main) for main
+    entry9b.o(.ARM.Collect$$$$0000000C) refers to main.o(i.main) for main
+    init.o(.text) refers to entry5.o(.ARM.Collect$$$$00000004) for __main_after_scatterload
+
+
+==============================================================================
+
+Removing Unused input sections from the image.
+
+    Removing main.o(.rev16_text), (4 bytes).
+    Removing main.o(.revsh_text), (4 bytes).
+    Removing uart.o(.rev16_text), (4 bytes).
+    Removing uart.o(.revsh_text), (4 bytes).
+    Removing uart.o(i.WDT_Init), (12 bytes).
+    Removing startup_sc32f10xx .o(HEAP), (512 bytes).
+    Removing sc32f10xx_gpio.o(.rev16_text), (4 bytes).
+    Removing sc32f10xx_gpio.o(.revsh_text), (4 bytes).
+    Removing sc32f10xx_gpio.o(i.GPIO_DeInit), (12 bytes).
+    Removing sc32f10xx_gpio.o(i.GPIO_Init), (66 bytes).
+    Removing sc32f10xx_gpio.o(i.GPIO_ReadInputDataBit), (54 bytes).
+    Removing sc32f10xx_gpio.o(i.GPIO_ResetBits), (40 bytes).
+    Removing sc32f10xx_gpio.o(i.GPIO_ReversalBits), (42 bytes).
+    Removing sc32f10xx_gpio.o(i.GPIO_SetBits), (40 bytes).
+    Removing sc32f10xx_gpio.o(i.GPIO_WriteBit), (32 bytes).
+    Removing sc32f10xx_gpio.o(i.GPIOx_ReadInputData), (8 bytes).
+    Removing sc32f10xx_gpio.o(i.GPIOx_Write), (4 bytes).
+    Removing sc32f10xx_rcc.o(.rev16_text), (4 bytes).
+    Removing sc32f10xx_rcc.o(.revsh_text), (4 bytes).
+    Removing sc32f10xx_rcc.o(i.RCC_AHBPeriphClockCmd), (32 bytes).
+    Removing sc32f10xx_rcc.o(i.RCC_AHBPeriphResetCmd), (32 bytes).
+    Removing sc32f10xx_rcc.o(i.RCC_APB0Cmd), (40 bytes).
+    Removing sc32f10xx_rcc.o(i.RCC_APB0KConfig), (28 bytes).
+    Removing sc32f10xx_rcc.o(i.RCC_APB0PeriphClockCmd), (32 bytes).
+    Removing sc32f10xx_rcc.o(i.RCC_APB0PeriphResetCmd), (32 bytes).
+    Removing sc32f10xx_rcc.o(i.RCC_APB1Cmd), (40 bytes).
+    Removing sc32f10xx_rcc.o(i.RCC_APB1KConfig), (28 bytes).
+    Removing sc32f10xx_rcc.o(i.RCC_APB1PeriphClockCmd), (32 bytes).
+    Removing sc32f10xx_rcc.o(i.RCC_APB1PeriphResetCmd), (32 bytes).
+    Removing sc32f10xx_rcc.o(i.RCC_APB2Cmd), (40 bytes).
+    Removing sc32f10xx_rcc.o(i.RCC_APB2KConfig), (28 bytes).
+    Removing sc32f10xx_rcc.o(i.RCC_APB2PeriphClockCmd), (32 bytes).
+    Removing sc32f10xx_rcc.o(i.RCC_APB2PeriphResetCmd), (32 bytes).
+    Removing sc32f10xx_rcc.o(i.RCC_BTMCLKConfig), (28 bytes).
+    Removing sc32f10xx_rcc.o(i.RCC_ClearITPendingBit), (20 bytes).
+    Removing sc32f10xx_rcc.o(i.RCC_DeInit), (16 bytes).
+    Removing sc32f10xx_rcc.o(i.RCC_GetFlagStatus), (24 bytes).
+    Removing sc32f10xx_rcc.o(i.RCC_GetITStatus), (24 bytes).
+    Removing sc32f10xx_rcc.o(i.RCC_HXTCmd), (36 bytes).
+    Removing sc32f10xx_rcc.o(i.RCC_ITConfig), (40 bytes).
+    Removing sc32f10xx_rcc.o(i.RCC_LCDCLKConfig), (32 bytes).
+    Removing sc32f10xx_rcc.o(i.RCC_LXTCmd), (36 bytes).
+    Removing sc32f10xx_rcc.o(i.RCC_PLLCLKConfig), (32 bytes).
+    Removing sc32f10xx_rcc.o(i.RCC_PLLCmd), (36 bytes).
+    Removing sc32f10xx_rcc.o(i.RCC_PLLQCmd), (36 bytes).
+    Removing sc32f10xx_rcc.o(i.RCC_PLLRCmd), (36 bytes).
+    Removing sc32f10xx_rcc.o(i.RCC_PWM0CLKConfig), (32 bytes).
+    Removing sc32f10xx_rcc.o(i.RCC_SYSCLKConfig), (40 bytes).
+    Removing sc32f10xx_rcc.o(i.RCC_SystickCLKConfig), (32 bytes).
+
+49 unused section(s) (total 1814 bytes) removed from the image.
+
+==============================================================================
+
+Image Symbol Table
+
+    Local Symbols
+
+    Symbol Name                              Value     Ov Type        Size  Object(Section)
+
+    RESET                                    0x00000000   Section      192  startup_sc32f10xx .o(RESET)
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry2.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry5.o ABSOLUTE
+    C\Uart.c                                 0x00000000   Number         0  uart.o ABSOLUTE
+    C\\Uart.c                                0x00000000   Number         0  uart.o ABSOLUTE
+    C\\main.C                                0x00000000   Number         0  main.o ABSOLUTE
+    C\main.C                                 0x00000000   Number         0  main.o ABSOLUTE
+    Driver\\src\\SC32F10xx_gpio.c            0x00000000   Number         0  sc32f10xx_gpio.o ABSOLUTE
+    Driver\\src\\SC32F10xx_rcc.c             0x00000000   Number         0  sc32f10xx_rcc.o ABSOLUTE
+    Driver\src\SC32F10xx_gpio.c              0x00000000   Number         0  sc32f10xx_gpio.o ABSOLUTE
+    Driver\src\SC32F10xx_rcc.c               0x00000000   Number         0  sc32f10xx_rcc.o ABSOLUTE
+    dc.s                                     0x00000000   Number         0  dc.o ABSOLUTE
+    handlers.s                               0x00000000   Number         0  handlers.o ABSOLUTE
+    init.s                                   0x00000000   Number         0  init.o ABSOLUTE
+    startup_sc32f10xx .s                     0x00000000   Number         0  startup_sc32f10xx .o ABSOLUTE
+    .ARM.Collect$$$$00000000                 0x000000c0   Section        0  entry.o(.ARM.Collect$$$$00000000)
+    .ARM.Collect$$$$00000001                 0x000000c0   Section        4  entry2.o(.ARM.Collect$$$$00000001)
+    .ARM.Collect$$$$00000004                 0x000000c4   Section        4  entry5.o(.ARM.Collect$$$$00000004)
+    .ARM.Collect$$$$00000008                 0x000000c8   Section        0  entry7b.o(.ARM.Collect$$$$00000008)
+    .ARM.Collect$$$$0000000A                 0x000000c8   Section        0  entry8b.o(.ARM.Collect$$$$0000000A)
+    .ARM.Collect$$$$0000000B                 0x000000c8   Section        8  entry9a.o(.ARM.Collect$$$$0000000B)
+    .ARM.Collect$$$$0000000D                 0x000000d0   Section        0  entry10a.o(.ARM.Collect$$$$0000000D)
+    .ARM.Collect$$$$0000000F                 0x000000d0   Section        0  entry11a.o(.ARM.Collect$$$$0000000F)
+    .ARM.Collect$$$$00002712                 0x000000d0   Section        4  entry2.o(.ARM.Collect$$$$00002712)
+    __lit__00000000                          0x000000d0   Data           4  entry2.o(.ARM.Collect$$$$00002712)
+    .text                                    0x000000d4   Section       36  startup_sc32f10xx .o(.text)
+    .text                                    0x000000f8   Section       36  init.o(.text)
+    i.RCC_HCLKConfig                         0x0000011c   Section        0  sc32f10xx_rcc.o(i.RCC_HCLKConfig)
+    i.RCC_HIRCCmd                            0x00000138   Section        0  sc32f10xx_rcc.o(i.RCC_HIRCCmd)
+    i.RCC_SYSCLKSWConfig                     0x0000015c   Section        0  sc32f10xx_rcc.o(i.RCC_SYSCLKSWConfig)
+    i.SystemClock_Config                     0x0000017c   Section        0  main.o(i.SystemClock_Config)
+    i.SystemInit                             0x00000194   Section        0  main.o(i.SystemInit)
+    i.__scatterload_copy                     0x000001a4   Section       14  handlers.o(i.__scatterload_copy)
+    i.__scatterload_null                     0x000001b2   Section        2  handlers.o(i.__scatterload_null)
+    i.__scatterload_zeroinit                 0x000001b4   Section       14  handlers.o(i.__scatterload_zeroinit)
+    i.main                                   0x000001c2   Section        0  main.o(i.main)
+    STACK                                    0x20000000   Section     1024  startup_sc32f10xx .o(STACK)
+
+    Global Symbols
+
+    Symbol Name                              Value     Ov Type        Size  Object(Section)
+
+    BuildAttributes$$THM_ISAv3M$S$PE$A:L22$X:L11$S22$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OSPACE$EBA8$MICROLIB$REQ8$PRES8$EABIv2 0x00000000   Number         0  anon$$obj.o ABSOLUTE
+    __ARM_use_no_argv                        0x00000000   Number         0  main.o ABSOLUTE
+    __Vectors                                0x00000000   Data           4  startup_sc32f10xx .o(RESET)
+    __cpp_initialize__aeabi_                  - Undefined Weak Reference
+    __cxa_finalize                            - Undefined Weak Reference
+    __decompress                              - Undefined Weak Reference
+    _clock_init                               - Undefined Weak Reference
+    _microlib_exit                            - Undefined Weak Reference
+    __Vectors_End                            0x000000c0   Data           0  startup_sc32f10xx .o(RESET)
+    __Vectors_Size                           0x000000c0   Number         0  startup_sc32f10xx .o ABSOLUTE
+    __main                                   0x000000c1   Thumb Code     0  entry.o(.ARM.Collect$$$$00000000)
+    _main_stk                                0x000000c1   Thumb Code     0  entry2.o(.ARM.Collect$$$$00000001)
+    _main_scatterload                        0x000000c5   Thumb Code     0  entry5.o(.ARM.Collect$$$$00000004)
+    __main_after_scatterload                 0x000000c9   Thumb Code     0  entry5.o(.ARM.Collect$$$$00000004)
+    _main_clock                              0x000000c9   Thumb Code     0  entry7b.o(.ARM.Collect$$$$00000008)
+    _main_cpp_init                           0x000000c9   Thumb Code     0  entry8b.o(.ARM.Collect$$$$0000000A)
+    _main_init                               0x000000c9   Thumb Code     0  entry9a.o(.ARM.Collect$$$$0000000B)
+    __rt_final_cpp                           0x000000d1   Thumb Code     0  entry10a.o(.ARM.Collect$$$$0000000D)
+    __rt_final_exit                          0x000000d1   Thumb Code     0  entry11a.o(.ARM.Collect$$$$0000000F)
+    Reset_Handler                            0x000000d5   Thumb Code     8  startup_sc32f10xx .o(.text)
+    NMI_Handler                              0x000000dd   Thumb Code     2  startup_sc32f10xx .o(.text)
+    HardFault_Handler                        0x000000df   Thumb Code     2  startup_sc32f10xx .o(.text)
+    MemManage_Handler                        0x000000e1   Thumb Code     2  startup_sc32f10xx .o(.text)
+    BusFault_Handler                         0x000000e3   Thumb Code     2  startup_sc32f10xx .o(.text)
+    UsageFault_Handler                       0x000000e5   Thumb Code     2  startup_sc32f10xx .o(.text)
+    SVC_Handler                              0x000000e7   Thumb Code     2  startup_sc32f10xx .o(.text)
+    DebugMon_Handler                         0x000000e9   Thumb Code     2  startup_sc32f10xx .o(.text)
+    PendSV_Handler                           0x000000eb   Thumb Code     2  startup_sc32f10xx .o(.text)
+    SysTick_Handler                          0x000000ed   Thumb Code     2  startup_sc32f10xx .o(.text)
+    ADC_IRQHandler                           0x000000ef   Thumb Code     0  startup_sc32f10xx .o(.text)
+    BTM_IRQHandler                           0x000000ef   Thumb Code     0  startup_sc32f10xx .o(.text)
+    CMP_IRQHandler                           0x000000ef   Thumb Code     0  startup_sc32f10xx .o(.text)
+    DMA0_IRQHandler                          0x000000ef   Thumb Code     0  startup_sc32f10xx .o(.text)
+    DMA1_IRQHandler                          0x000000ef   Thumb Code     0  startup_sc32f10xx .o(.text)
+    DMA2_IRQHandler                          0x000000ef   Thumb Code     0  startup_sc32f10xx .o(.text)
+    DMA3_IRQHandler                          0x000000ef   Thumb Code     0  startup_sc32f10xx .o(.text)
+    EXTI0_IRQHandler                         0x000000ef   Thumb Code     0  startup_sc32f10xx .o(.text)
+    EXTI12_15_IRQHandler                     0x000000ef   Thumb Code     0  startup_sc32f10xx .o(.text)
+    EXTI1_7_IRQHandler                       0x000000ef   Thumb Code     0  startup_sc32f10xx .o(.text)
+    EXTI8_11_IRQHandler                      0x000000ef   Thumb Code     0  startup_sc32f10xx .o(.text)
+    PWM0_IRQHandler                          0x000000ef   Thumb Code     0  startup_sc32f10xx .o(.text)
+    PWM1_IRQHandler                          0x000000ef   Thumb Code     0  startup_sc32f10xx .o(.text)
+    RCC_IRQHandler                           0x000000ef   Thumb Code     0  startup_sc32f10xx .o(.text)
+    SPI0_IRQHandler                          0x000000ef   Thumb Code     0  startup_sc32f10xx .o(.text)
+    SPI1_IRQHandler                          0x000000ef   Thumb Code     0  startup_sc32f10xx .o(.text)
+    TIMER0_IRQHandler                        0x000000ef   Thumb Code     0  startup_sc32f10xx .o(.text)
+    TIMER1_IRQHandler                        0x000000ef   Thumb Code     0  startup_sc32f10xx .o(.text)
+    TIMER2_IRQHandler                        0x000000ef   Thumb Code     0  startup_sc32f10xx .o(.text)
+    TIMER3_IRQHandler                        0x000000ef   Thumb Code     0  startup_sc32f10xx .o(.text)
+    TIMER4_5_IRQHandler                      0x000000ef   Thumb Code     0  startup_sc32f10xx .o(.text)
+    TIMER6_7_IRQHandler                      0x000000ef   Thumb Code     0  startup_sc32f10xx .o(.text)
+    TK_IRQHandler                            0x000000ef   Thumb Code     0  startup_sc32f10xx .o(.text)
+    TWI0_IRQHandler                          0x000000ef   Thumb Code     0  startup_sc32f10xx .o(.text)
+    TWI1_IRQHandler                          0x000000ef   Thumb Code     0  startup_sc32f10xx .o(.text)
+    UART0_2_IRQHandler                       0x000000ef   Thumb Code     0  startup_sc32f10xx .o(.text)
+    UART1_3_IRQHandler                       0x000000ef   Thumb Code     0  startup_sc32f10xx .o(.text)
+    __scatterload                            0x000000f9   Thumb Code    28  init.o(.text)
+    __scatterload_rt2                        0x000000f9   Thumb Code     0  init.o(.text)
+    RCC_HCLKConfig                           0x0000011d   Thumb Code    24  sc32f10xx_rcc.o(i.RCC_HCLKConfig)
+    RCC_HIRCCmd                              0x00000139   Thumb Code    32  sc32f10xx_rcc.o(i.RCC_HIRCCmd)
+    RCC_SYSCLKSWConfig                       0x0000015d   Thumb Code    26  sc32f10xx_rcc.o(i.RCC_SYSCLKSWConfig)
+    SystemClock_Config                       0x0000017d   Thumb Code    24  main.o(i.SystemClock_Config)
+    SystemInit                               0x00000195   Thumb Code    10  main.o(i.SystemInit)
+    __scatterload_copy                       0x000001a5   Thumb Code    14  handlers.o(i.__scatterload_copy)
+    __scatterload_null                       0x000001b3   Thumb Code     2  handlers.o(i.__scatterload_null)
+    __scatterload_zeroinit                   0x000001b5   Thumb Code    14  handlers.o(i.__scatterload_zeroinit)
+    main                                     0x000001c3   Thumb Code     8  main.o(i.main)
+    Region$$Table$$Base                      0x000001cc   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x000001dc   Number         0  anon$$obj.o(Region$$Table)
+    __initial_sp                             0x20000400   Data           0  startup_sc32f10xx .o(STACK)
+
+
+
+==============================================================================
+
+Memory Map of the image
+
+  Image Entry point : 0x000000c1
+
+  Load Region LR_IROM1 (Base: 0x00000000, Size: 0x000001dc, Max: 0x00040000, ABSOLUTE)
+
+    Execution Region ER_IROM1 (Exec base: 0x00000000, Load base: 0x00000000, Size: 0x000001dc, Max: 0x00040000, ABSOLUTE)
+
+    Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x00000000   0x00000000   0x000000c0   Data   RO           96    RESET               startup_sc32f10xx .o
+    0x000000c0   0x000000c0   0x00000000   Code   RO          387  * .ARM.Collect$$$$00000000  mc_p.l(entry.o)
+    0x000000c0   0x000000c0   0x00000004   Code   RO          390    .ARM.Collect$$$$00000001  mc_p.l(entry2.o)
+    0x000000c4   0x000000c4   0x00000004   Code   RO          393    .ARM.Collect$$$$00000004  mc_p.l(entry5.o)
+    0x000000c8   0x000000c8   0x00000000   Code   RO          395    .ARM.Collect$$$$00000008  mc_p.l(entry7b.o)
+    0x000000c8   0x000000c8   0x00000000   Code   RO          397    .ARM.Collect$$$$0000000A  mc_p.l(entry8b.o)
+    0x000000c8   0x000000c8   0x00000008   Code   RO          398    .ARM.Collect$$$$0000000B  mc_p.l(entry9a.o)
+    0x000000d0   0x000000d0   0x00000000   Code   RO          400    .ARM.Collect$$$$0000000D  mc_p.l(entry10a.o)
+    0x000000d0   0x000000d0   0x00000000   Code   RO          402    .ARM.Collect$$$$0000000F  mc_p.l(entry11a.o)
+    0x000000d0   0x000000d0   0x00000004   Code   RO          391    .ARM.Collect$$$$00002712  mc_p.l(entry2.o)
+    0x000000d4   0x000000d4   0x00000024   Code   RO           97    .text               startup_sc32f10xx .o
+    0x000000f8   0x000000f8   0x00000024   Code   RO          404    .text               mc_p.l(init.o)
+    0x0000011c   0x0000011c   0x0000001c   Code   RO          196    i.RCC_HCLKConfig    sc32f10xx_rcc.o
+    0x00000138   0x00000138   0x00000024   Code   RO          197    i.RCC_HIRCCmd       sc32f10xx_rcc.o
+    0x0000015c   0x0000015c   0x00000020   Code   RO          208    i.RCC_SYSCLKSWConfig  sc32f10xx_rcc.o
+    0x0000017c   0x0000017c   0x00000018   Code   RO            3    i.SystemClock_Config  main.o
+    0x00000194   0x00000194   0x00000010   Code   RO            4    i.SystemInit        main.o
+    0x000001a4   0x000001a4   0x0000000e   Code   RO          408    i.__scatterload_copy  mc_p.l(handlers.o)
+    0x000001b2   0x000001b2   0x00000002   Code   RO          409    i.__scatterload_null  mc_p.l(handlers.o)
+    0x000001b4   0x000001b4   0x0000000e   Code   RO          410    i.__scatterload_zeroinit  mc_p.l(handlers.o)
+    0x000001c2   0x000001c2   0x00000008   Code   RO            5    i.main              main.o
+    0x000001ca   0x000001ca   0x00000002   PAD
+    0x000001cc   0x000001cc   0x00000010   Data   RO          406    Region$$Table       anon$$obj.o
+
+
+    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x000001dc, Size: 0x00000400, Max: 0x00020000, ABSOLUTE)
+
+    Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x20000000        -       0x00000400   Zero   RW           94    STACK               startup_sc32f10xx .o
+
+
+==============================================================================
+
+Image component sizes
+
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
+
+        48          6          0          0          0       8413   main.o
+         0          0          0          0          0      55844   sc32f10xx_gpio.o
+        96         14          0          0          0       1348   sc32f10xx_rcc.o
+        36          8        192          0       1024        744   startup_sc32f10xx .o
+
+    ----------------------------------------------------------------------
+       182         28        208          0       1024      66349   Object Totals
+         0          0         16          0          0          0   (incl. Generated)
+         2          0          0          0          0          0   (incl. Padding)
+
+    ----------------------------------------------------------------------
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Library Member Name
+
+         0          0          0          0          0          0   entry.o
+         0          0          0          0          0          0   entry10a.o
+         0          0          0          0          0          0   entry11a.o
+         8          4          0          0          0          0   entry2.o
+         4          0          0          0          0          0   entry5.o
+         0          0          0          0          0          0   entry7b.o
+         0          0          0          0          0          0   entry8b.o
+         8          4          0          0          0          0   entry9a.o
+        30          0          0          0          0          0   handlers.o
+        36          8          0          0          0         68   init.o
+
+    ----------------------------------------------------------------------
+        86         16          0          0          0         68   Library Totals
+         0          0          0          0          0          0   (incl. Padding)
+
+    ----------------------------------------------------------------------
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Library Name
+
+        86         16          0          0          0         68   mc_p.l
+
+    ----------------------------------------------------------------------
+        86         16          0          0          0         68   Library Totals
+
+    ----------------------------------------------------------------------
+
+==============================================================================
+
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
+
+       268         44        208          0       1024      66437   Grand Totals
+       268         44        208          0       1024      66437   ELF Image Totals
+       268         44        208          0          0          0   ROM Totals
+
+==============================================================================
+
+    Total RO  Size (Code + RO Data)                  476 (   0.46kB)
+    Total RW  Size (RW Data + ZI Data)              1024 (   1.00kB)
+    Total ROM Size (Code + RO Data + RW Data)        476 (   0.46kB)
+
+==============================================================================
+

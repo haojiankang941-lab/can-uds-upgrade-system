@@ -1,0 +1,12 @@
+--cpu Cortex-M0+
+".\objects\main.o"
+".\objects\uart.o"
+".\objects\startup_sc32f10xx .o"
+".\objects\sc32f10xx_gpio.o"
+".\objects\sc32f10xx_rcc.o"
+--library_type=microlib
+--feedback ".\Objects\Test.fed" --feedback_image=none
+--strict --scatter ".\Objects\Test.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\Listings\Test.map" -o .\Objects\Test.axf

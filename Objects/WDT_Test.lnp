@@ -1,0 +1,12 @@
+--cpu Cortex-M0+
+".\objects\main.o"
+".\objects\uart.o"
+".\objects\startup_w1251.o"
+".\objects\sc32f10xx_rcc.o"
+".\objects\sc32f10xx_gpio.o"
+--library_type=microlib
+--feedback ".\Objects\WDT_Test.fed" --feedback_image=none
+--strict --scatter ".\Objects\WDT_Test.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\Listings\WDT_Test.map" -o .\Objects\WDT_Test.axf

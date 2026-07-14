@@ -1,0 +1,12 @@
+.\objects\uart.o: C\Uart.c
+.\objects\uart.o: .\H\main.h
+.\objects\uart.o: .\H\W1251.h
+.\objects\uart.o: .\CMSIS\core_cm0plus.h
+.\objects\uart.o: D:\KEIL5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\uart.o: .\CMSIS\cmsis_version.h
+.\objects\uart.o: .\CMSIS\cmsis_compiler.h
+.\objects\uart.o: .\CMSIS\cmsis_armcc.h
+.\objects\uart.o: .\CMSIS\mpu_armv7.h
+.\objects\uart.o: .\Driver\inc\SC32F10xx_rcc.h
+.\objects\uart.o: .\Driver\inc\SC32F10xx_gpio.h
+.\objects\uart.o: D:\KEIL5\ARM\ARMCC\Bin\..\include\stdio.h
