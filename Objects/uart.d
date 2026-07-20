@@ -10,3 +10,4 @@
 .\objects\uart.o: .\Driver\inc\SC32F10xx_rcc.h
 .\objects\uart.o: .\Driver\inc\SC32F10xx_gpio.h
 .\objects\uart.o: D:\KEIL5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\uart.o: .\H\iap.h

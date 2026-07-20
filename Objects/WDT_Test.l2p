@@ -1,6 +1,7 @@
 --cpu Cortex-M0+
 ".\objects\main.o"
 ".\objects\uart.o"
+".\objects\iap.o"
 ".\objects\startup_w1251.o"
 ".\objects\sc32f10xx_rcc.o"
 ".\objects\sc32f10xx_gpio.o"

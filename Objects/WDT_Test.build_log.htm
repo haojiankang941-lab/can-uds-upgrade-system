@@ -32,22 +32,34 @@ Clean started - Project: 'Test'
 Clean done
 compiling main.C...
 compiling Uart.c...
+compiling iap.c...
+C\iap.c(17): warning:  #61-D: integer operation result is out of range
+    IAP->IAP_CON |= IAP_CON_LOCK;
+C\iap.c(17): warning:  #68-D: integer conversion resulted in a change of sign
+    IAP->IAP_CON |= IAP_CON_LOCK;
+C\iap.c: 2 warnings, 0 errors
 assembling startup_w1251.s...
 compiling SC32F10xx_rcc.c...
 compiling SC32F10xx_gpio.c...
 linking...
-Program Size: Code=836 RO-data=224 RW-data=4 ZI-data=1028  
-".\Objects\WDT_Test.axf" - 0 Error(s), 0 Warning(s).
+Program Size: Code=1016 RO-data=224 RW-data=4 ZI-data=1028  
+".\Objects\WDT_Test.axf" - 0 Error(s), 2 Warning(s).
 
 *** Performing Cross-Module-Optimization:
 compiling main.C...
 compiling Uart.c...
+compiling iap.c...
+C\iap.c(17): warning:  #61-D: integer operation result is out of range
+    IAP->IAP_CON |= IAP_CON_LOCK;
+C\iap.c(17): warning:  #68-D: integer conversion resulted in a change of sign
+    IAP->IAP_CON |= IAP_CON_LOCK;
+C\iap.c: 2 warnings, 0 errors
 compiling SC32F10xx_rcc.c...
 compiling SC32F10xx_gpio.c...
 linking...
-Program Size: Code=836 RO-data=224 RW-data=4 ZI-data=1028  
+Program Size: Code=1016 RO-data=224 RW-data=4 ZI-data=1028  
 FromELF: creating hex file...
-".\Objects\WDT_Test.axf" - 0 Error(s), 0 Warning(s).
+".\Objects\WDT_Test.axf" - 0 Error(s), 2 Warning(s).
 *** Completed Cross-Module-Optimization after 2 iteration(s).
 
 <h2>Software Packages used:</h2>
@@ -61,7 +73,7 @@ Package Vendor: ARM
   D:/KEIL5/ARM/CMSIS/5.8.0/Device/ARM/ARMCM0plus/Include
 
 <h2>Collection of Component Files used:</h2>
-Build Time Elapsed:  00:00:05
+Build Time Elapsed:  00:00:06
 </pre>
 </body>
 </html>

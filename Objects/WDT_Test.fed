@@ -1,5 +1,10 @@
-;#<FEEDBACK># ARM Linker, 5060960: Last Updated: Tue Jul 14 15:17:56 2026
+;#<FEEDBACK># ARM Linker, 5060960: Last Updated: Tue Jul 14 17:21:45 2026
 ;VERSION 0.2
+;FILE iap.o
+IAP_EraseAll <= USED 0
+IAP_ProgramWord <= USED 0
+__asm___5_iap_c_14fd2dba____REV16 <= USED 0
+__asm___5_iap_c_14fd2dba____REVSH <= USED 0
 ;FILE main.o
 __asm___6_main_C_a9c8fbbb____REV16 <= USED 0
 __asm___6_main_C_a9c8fbbb____REVSH <= USED 0
@@ -44,5 +49,7 @@ __asm___15_SC32F10xx_rcc_c_49e27980____REV16 <= USED 0
 __asm___15_SC32F10xx_rcc_c_49e27980____REVSH <= USED 0
 ;FILE startup_w1251.o
 ;FILE uart.o
+Delay <= USED 0
+Uart_GetByte <= USED 0
 __asm___6_Uart_c_18154c62____REV16 <= USED 0
 __asm___6_Uart_c_18154c62____REVSH <= USED 0
