@@ -92,7 +92,7 @@ __Vectors       DCD     __initial_sp                   ; Top of Stack
 				DCD     0                					; Reserved
                 DCD     0                					; Reserved
 				DCD		0									; UCPD1/UCPD2	
-				DCD     0             						; LED/LCD
+				DCD     CAN_IRQHandler             			; CAN
                 DCD     ADC_IRQHandler             			; ADC
                 DCD     CMP_IRQHandler            			; CMP
                 DCD     TK_IRQHandler 						; TK               

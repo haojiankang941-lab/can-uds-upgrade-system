@@ -2,6 +2,8 @@
 ".\objects\main.o"
 ".\objects\uart.o"
 ".\objects\iap.o"
+".\objects\boot.o"
+".\objects\ota.o"
 ".\objects\startup_w1251.o"
 ".\objects\sc32f10xx_rcc.o"
 ".\objects\sc32f10xx_gpio.o"

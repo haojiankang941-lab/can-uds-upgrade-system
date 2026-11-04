@@ -8,18 +8,24 @@ void GPIO_Config(void)
 {
     GPIO_InitTypeDef GPIO_InitType;
     GPIO_InitType.GPIO_Mode = GPIO_Mode_OUT;
-    GPIO_InitType.GPIO_PuPd = GPIO_PuPd_UP;
+    GPIO_InitType.GPIO_PuPd = GPIO_PuPd_NOPULL;
     GPIO_InitType.GPIO_Pin = 0xffff;
     GPIO_Init(GPIOA, &GPIO_InitType);
     GPIO_Init(GPIOB, &GPIO_InitType);
-    GPIO_Init(GPIOC, &GPIO_InitType);
     GPIO_Init(GPIOD, &GPIO_InitType);
+    /* PC6 is CAN_RX (input from the transceiver): never drive it as an
+     * output, otherwise it fights the transceiver's RXD pin. */
+    GPIO_InitType.GPIO_Pin = 0xffbf;
+    GPIO_Init(GPIOC, &GPIO_InitType);
     uint16_t i;
     for(i = 0; i < 16; i++)
     {
         PA_BIT(i) = 1;
         PB_BIT(i) = 1;
-        PC_BIT(i) = 1;
+        if (i != 6)
+        {
+            PC_BIT(i) = 1;
+        }
         PD_BIT(i) = 1;
     }
 }
@@ -46,12 +52,20 @@ void Delay(unsigned int time)
 }
 
 
-void Uart_SendByte(uint8_t data)
+void Uart_SendByte(char data)
 {    
 	  UART0->UART_DATA = data;
   while(!(UART0->UART_STS & UART_STS_TXIF));
 	UART0->UART_STS = UART_STS_TXIF;
    
+}
+
+int fputc(int ch, FILE *f) 
+{ 
+    UART0->UART_DATA = ch;
+    while(!(UART0->UART_STS & UART_STS_TXIF));
+	 UART0->UART_STS |= UART_STS_TXIF;
+    return (ch); 
 }
 
 /* ── 中断接收一个字节 ── */
@@ -61,6 +75,7 @@ uint8_t Uart_GetByte(void)
     rx_flag = 0;
     return rx_data;
 }
+
 
 /* ── UART0 中断服务 ── */
 void UART0_2_IRQHandler(void)

@@ -277,7 +277,7 @@
               </OCR_RVCT3>
               <OCR_RVCT4>
                 <Type>1</Type>
-                <StartAddress>0x8000000</StartAddress>
+                <StartAddress>0x8d00000</StartAddress>
                 <Size>0x4000</Size>
               </OCR_RVCT4>
               <OCR_RVCT5>
@@ -405,6 +405,61 @@
               <FileType>5</FileType>
               <FilePath>.\H\iap.h</FilePath>
             </File>
+            <File>
+              <FileName>boot.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\C\boot.c</FilePath>
+            </File>
+            <File>
+              <FileName>boot.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\C\boot.h</FilePath>
+            </File>
+            <File>
+              <FileName>ota.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\C\ota.h</FilePath>
+            </File>
+            <File>
+              <FileName>boot_can.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\C\boot_can.c</FilePath>
+            </File>
+            <File>
+              <FileName>boot_can.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\H\boot_can.h</FilePath>
+            </File>
+            <File>
+              <FileName>isotp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\C\isotp.c</FilePath>
+            </File>
+            <File>
+              <FileName>isotp.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\H\isotp.h</FilePath>
+            </File>
+            <File>
+              <FileName>uds.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\C\uds.c</FilePath>
+            </File>
+            <File>
+              <FileName>uds.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\H\uds.h</FilePath>
+            </File>
+            <File>
+              <FileName>ota_flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\C\ota_flash.c</FilePath>
+            </File>
+            <File>
+              <FileName>ota_flash.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\H\ota_flash.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -429,6 +484,11 @@
               <FileName>SC32F10xx_gpio.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Driver\src\SC32F10xx_gpio.c</FilePath>
+            </File>
+            <File>
+              <FileName>SC32F11xx_can.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Driver\src\SC32F11xx_can.c</FilePath>
             </File>
             <File>
               <FileName>W1251.h</FileName>

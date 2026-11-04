@@ -140,6 +140,7 @@ typedef enum
 
 #define RCC_AHBPeriph_DMA                ((uint32_t)0x00000001)
 #define RCC_AHBPeriph_CRC                ((uint32_t)0x00000002)
+#define RCC_AHBPeriph_CAN                ((uint32_t)0x00000010)  /* AHB_CFG bit4 CANEN */
 
 
 /** @defgroup APB0_peripheral 

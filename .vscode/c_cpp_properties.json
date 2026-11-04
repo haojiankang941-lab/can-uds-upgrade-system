@@ -3,15 +3,13 @@
         {
             "name": "Target 1",
             "includePath": [
-                "d:\\1___IC\\W1251_OTA\\备份\\H",
-                "d:\\1___IC\\W1251_OTA\\备份\\CMSIS",
-                "d:\\1___IC\\W1251_OTA\\W7901",
-                "d:\\1___IC\\W1251_OTA\\备份\\Driver\\inc",
-                "D:\\KEIL5\\ARM\\ARMCC\\include",
-                "D:\\KEIL5\\ARM\\ARMCC\\include\\rw",
-                "d:\\1___IC\\W1251_OTA\\备份\\C",
-                "d:\\1___IC\\W1251_OTA\\备份",
-                "d:\\1___IC\\W1251_OTA\\备份\\Driver\\src"
+                "d:\\CAN优化\\BOOT\\BOOT\\H",
+                "d:\\CAN优化\\BOOT\\BOOT\\CMSIS",
+                "d:\\CAN优化\\BOOT\\W7901",
+                "d:\\CAN优化\\BOOT\\BOOT\\Driver\\inc",
+                "d:\\CAN优化\\BOOT\\BOOT\\C",
+                "d:\\CAN优化\\BOOT\\BOOT",
+                "d:\\CAN优化\\BOOT\\BOOT\\Driver\\src"
             ],
             "defines": [
                 "__CC_ARM",

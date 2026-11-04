@@ -1,13 +1,21 @@
-;#<FEEDBACK># ARM Linker, 5060960: Last Updated: Tue Jul 14 17:21:45 2026
+;#<FEEDBACK># ARM Linker, 5060960: Last Updated: Thu Jul 16 17:34:36 2026
 ;VERSION 0.2
+;FILE boot.o
+__asm___6_boot_c_0faa32af____REV16 <= USED 0
+__asm___6_boot_c_0faa32af____REVSH <= USED 0
 ;FILE iap.o
 IAP_EraseAll <= USED 0
-IAP_ProgramWord <= USED 0
+IAP_TestMode <= USED 0
 __asm___5_iap_c_14fd2dba____REV16 <= USED 0
 __asm___5_iap_c_14fd2dba____REVSH <= USED 0
+jump_to_BOOT <= USED 0
 ;FILE main.o
 __asm___6_main_C_a9c8fbbb____REV16 <= USED 0
 __asm___6_main_C_a9c8fbbb____REVSH <= USED 0
+;FILE ota.o
+OTA_CheckRequest <= USED 0
+__asm___5_ota_c_a18b1abf____REV16 <= USED 0
+__asm___5_ota_c_a18b1abf____REVSH <= USED 0
 ;FILE sc32f10xx_gpio.o
 GPIO_DeInit <= USED 0
 GPIO_ReadInputDataBit <= USED 0
@@ -50,6 +58,5 @@ __asm___15_SC32F10xx_rcc_c_49e27980____REVSH <= USED 0
 ;FILE startup_w1251.o
 ;FILE uart.o
 Delay <= USED 0
-Uart_GetByte <= USED 0
 __asm___6_Uart_c_18154c62____REV16 <= USED 0
 __asm___6_Uart_c_18154c62____REVSH <= USED 0

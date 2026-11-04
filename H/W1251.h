@@ -460,22 +460,7 @@ typedef struct
 {
 	__IO uint32_t CAN_RX_ID;     		/*!< CAN Receive Buffer ID register,    Address offset: 0x00 */
 	__IO uint32_t CAN_RX_CTRL;   		/*!< CAN Receive Control register,    Address offset: 0x04 */
-	__IO uint32_t CAN_RBUF0;     		/*!< CAN Receive Buffer0 register,    Address offset: 0x08 */
-	__IO uint32_t CAN_RBUF1;     		/*!< CAN Receive Buffer1 register,    Address offset: 0x0C */
-	__IO uint32_t CAN_RBUF2;     		/*!< CAN Receive Buffer2 register,    Address offset: 0x10 */
-	__IO uint32_t CAN_RBUF3;     		/*!< CAN Receive Buffer3 register,    Address offset: 0x14 */
-	__IO uint32_t CAN_RBUF4;     		/*!< CAN Receive Buffer4 register,    Address offset: 0x18 */
-	__IO uint32_t CAN_RBUF5;     		/*!< CAN Receive Buffer5 register,    Address offset: 0x1C */
-	__IO uint32_t CAN_RBUF6;     		/*!< CAN Receive Buffer6 register,    Address offset: 0x20 */
-	__IO uint32_t CAN_RBUF7;     		/*!< CAN Receive Buffer7 register,    Address offset: 0x24 */
-	__IO uint32_t CAN_RBUF8;     		/*!< CAN Receive Buffer8 register,    Address offset: 0x28 */
-	__IO uint32_t CAN_RBUF9;		  	/*!< CAN Receive Buffer9 register,      Address offset: 0x2C */
-	__IO uint32_t CAN_RBUF10;		  	/*!< CAN Receive Buffer10 register,     Address offset: 0x30 */
-	__IO uint32_t CAN_RBUF11;			  /*!< CAN Receive Buffer11 register,     Address offset: 0x34 */
-	__IO uint32_t CAN_RBUF12;		  	/*!< CAN Receive Buffer12 register,     Address offset: 0x38 */
-	__IO uint32_t CAN_RBUF13;			  /*!< CAN Receive Buffer13 register,     Address offset: 0x3C */
-	__IO uint32_t CAN_RBUF14;			  /*!< CAN Receive Buffer14 register,     Address offset: 0x40 */
-	__IO uint32_t CAN_RBUF15;			  /*!< CAN Receive Buffer15 register,     Address offset: 0x44 */
+	__IO uint32_t CAN_RBUF[16];     		/*!< CAN Receive Buffer 0..15, Address offset: 0x08..0x44 */
 	__IO uint32_t CAN_RTSL;				  /*!< CAN Receive TimeStampLow register,    Address offset: 0x48 */
 	__IO uint32_t CAN_RTSH;				  /*!< CAN Receive TimeStampHigh register,    Address offset: 0x4C */
 } CAN_RX_BUFFER_TypeDef;
@@ -484,22 +469,7 @@ typedef struct
 {
 	__IO uint32_t CAN_TX_ID;     		/*!< CAN Transmit Buffer ID register,  Address offset: 0x50 */
 	__IO uint32_t CAN_TX_CTRL;   		/*!< CAN Transmit Control register,    Address offset: 0x54 */
-	__IO uint32_t CAN_TBUF0;     		/*!< CAN Transmit Buffer0 register,    Address offset: 0x58 */
-	__IO uint32_t CAN_TBUF1;     		/*!< CAN Transmit Buffer1 register,    Address offset: 0x5C */
-	__IO uint32_t CAN_TBUF2;     		/*!< CAN Transmit Buffer2 register,    Address offset: 0x60 */
-	__IO uint32_t CAN_TBUF3;     		/*!< CAN Transmit Buffer3 register,    Address offset: 0x64 */
-	__IO uint32_t CAN_TBUF4;     		/*!< CAN Transmit Buffer4 register,    Address offset: 0x68 */
-	__IO uint32_t CAN_TBUF5;     		/*!< CAN Transmit Buffer5 register,    Address offset: 0x6C */
-	__IO uint32_t CAN_TBUF6;     		/*!< CAN Transmit Buffer6 register,    Address offset: 0x70 */
-	__IO uint32_t CAN_TBUF7;     		/*!< CAN Transmit Buffer7 register,    Address offset: 0x74 */
-	__IO uint32_t CAN_TBUF8;     		/*!< CAN Transmit Buffer8 register,    Address offset: 0x78 */
-	__IO uint32_t CAN_TBUF9;     		/*!< CAN Transmit Buffer9 register,    Address offset: 0x7C */
-	__IO uint32_t CAN_TBUF10;    		/*!< CAN Transmit Buffer10 register,    Address offset: 0x80 */
-	__IO uint32_t CAN_TBUF11;    		/*!< CAN Transmit Buffer11 register,    Address offset: 0x84 */
-	__IO uint32_t CAN_TBUF12;    		/*!< CAN Transmit Buffer12 register,    Address offset: 0x88 */
-	__IO uint32_t CAN_TBUF13;    		/*!< CAN Transmit Buffer13 register,    Address offset: 0x8C */
-	__IO uint32_t CAN_TBUF14;    		/*!< CAN Transmit Buffer14 register,    Address offset: 0x90 */     		/*!< CAN Transmit Buffer0 register,    Address offset: 0x08 */
-	__IO uint32_t CAN_TBUF15;    		/*!< CAN Transmit Buffer15 register,    Address offset: 0x94 */
+	__IO uint32_t CAN_TBUF[16];     		/*!< CAN Transmit Buffer 0..15, Address offset: 0x58..0x94 */
 } CAN_TX_BUFFER_TypeDef;
 typedef struct
 {
@@ -519,6 +489,7 @@ typedef struct
 	__IO uint32_t CAN_IDE;          /*!< CAN IDE register,                                   Address offset: 0xCC */
 	__IO uint32_t CAN_TIML;         /*!< CAN TimestampLow Timer register,                    Address offset: 0xD0 */  
 	__IO uint32_t CAN_TIMH;         /*!< CAN TimestampHigh Timer register,                   Address offset: 0xD4 */   
+	__IO uint32_t CAN_SADDR;       /*!< CAN SRAM Base Address register, Address offset: 0xD8 */
 } CAN_TypeDef;
 /*
 	 IFB[400H]~IFB[5FFH] for DesignOption

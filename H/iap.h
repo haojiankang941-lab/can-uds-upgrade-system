@@ -10,5 +10,7 @@ void IAP_SERASE(uint32_t Add, uint32_t AreaBase);
 void IAP_EraseAll(void);
 void IAP_ProgramWord(uint32_t Add, uint32_t Data);
 void IAP_TestMode(void); 
+void jump_to_flash(void);
+void jump_to_BOOT(void);
 #endif
 

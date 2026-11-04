@@ -1,0 +1,12 @@
+.\objects\ota.o: C\ota.c
+.\objects\ota.o: C\ota.h
+.\objects\ota.o: D:\KEIL5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\ota.o: C\boot.h
+.\objects\ota.o: .\H\iap.h
+.\objects\ota.o: .\H\W1251.h
+.\objects\ota.o: .\CMSIS\core_cm0plus.h
+.\objects\ota.o: .\CMSIS\cmsis_version.h
+.\objects\ota.o: .\CMSIS\cmsis_compiler.h
+.\objects\ota.o: .\CMSIS\cmsis_armcc.h
+.\objects\ota.o: .\CMSIS\mpu_armv7.h
+.\objects\ota.o: D:\KEIL5\ARM\ARMCC\Bin\..\include\stdio.h

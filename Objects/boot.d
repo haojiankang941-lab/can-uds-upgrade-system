@@ -1,0 +1,11 @@
+.\objects\boot.o: C\boot.c
+.\objects\boot.o: C\boot.h
+.\objects\boot.o: D:\KEIL5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\boot.o: C\ota.h
+.\objects\boot.o: .\H\iap.h
+.\objects\boot.o: .\H\W1251.h
+.\objects\boot.o: .\CMSIS\core_cm0plus.h
+.\objects\boot.o: .\CMSIS\cmsis_version.h
+.\objects\boot.o: .\CMSIS\cmsis_compiler.h
+.\objects\boot.o: .\CMSIS\cmsis_armcc.h
+.\objects\boot.o: .\CMSIS\mpu_armv7.h

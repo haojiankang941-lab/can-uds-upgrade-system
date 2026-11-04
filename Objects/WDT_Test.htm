@@ -3,11 +3,11 @@
 <title>Static Call Graph - [.\Objects\WDT_Test.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\WDT_Test.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Tue Jul 14 17:21:48 2026
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Thu Jul 16 17:34:39 2026
 <BR><P>
-<H3>Maximum Stack Usage =         28 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =        628 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
-main &rArr; GPIO_Config &rArr; GPIO_Init
+main &rArr; OTA_ReceiveBin &rArr; Flash_WriteBuffer &rArr; PackWord
 <P>
 <H3>
 Mutually Recursive functions
@@ -64,6 +64,7 @@ Function Pointers
  <LI><a href="#[11]">UART1_3_IRQHandler</a> from startup_w1251.o(.text) referenced from startup_w1251.o(RESET)
  <LI><a href="#[5]">UsageFault_Handler</a> from startup_w1251.o(.text) referenced from startup_w1251.o(RESET)
  <LI><a href="#[26]">__main</a> from entry.o(.ARM.Collect$$$$00000000) referenced from startup_w1251.o(.text)
+ <LI><a href="#[27]">fputc</a> from uart.o(i.fputc) referenced from printf8.o(i.__0printf$8)
  <LI><a href="#[24]">main</a> from main.o(i.main) referenced from entry9a.o(.ARM.Collect$$$$0000000B)
 </UL>
 <P>
@@ -73,29 +74,29 @@ Global Symbols
 <P><STRONG><a name="[26]"></a>__main</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry.o(.ARM.Collect$$$$00000000))
 <BR>[Address Reference Count : 1]<UL><LI> startup_w1251.o(.text)
 </UL>
-<P><STRONG><a name="[3c]"></a>_main_stk</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry2.o(.ARM.Collect$$$$00000001))
+<P><STRONG><a name="[50]"></a>_main_stk</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry2.o(.ARM.Collect$$$$00000001))
 
-<P><STRONG><a name="[27]"></a>_main_scatterload</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry5.o(.ARM.Collect$$$$00000004))
-<BR><BR>[Calls]<UL><LI><a href="#[28]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload
+<P><STRONG><a name="[28]"></a>_main_scatterload</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry5.o(.ARM.Collect$$$$00000004))
+<BR><BR>[Calls]<UL><LI><a href="#[29]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload
 </UL>
 
-<P><STRONG><a name="[2b]"></a>__main_after_scatterload</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry5.o(.ARM.Collect$$$$00000004))
-<BR><BR>[Called By]<UL><LI><a href="#[28]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload
+<P><STRONG><a name="[2f]"></a>__main_after_scatterload</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry5.o(.ARM.Collect$$$$00000004))
+<BR><BR>[Called By]<UL><LI><a href="#[29]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload
 </UL>
 
-<P><STRONG><a name="[3d]"></a>_main_clock</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry7b.o(.ARM.Collect$$$$00000008))
+<P><STRONG><a name="[51]"></a>_main_clock</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry7b.o(.ARM.Collect$$$$00000008))
 
-<P><STRONG><a name="[3e]"></a>_main_cpp_init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry8b.o(.ARM.Collect$$$$0000000A))
+<P><STRONG><a name="[52]"></a>_main_cpp_init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry8b.o(.ARM.Collect$$$$0000000A))
 
-<P><STRONG><a name="[3f]"></a>_main_init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry9a.o(.ARM.Collect$$$$0000000B))
+<P><STRONG><a name="[53]"></a>_main_init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry9a.o(.ARM.Collect$$$$0000000B))
 
-<P><STRONG><a name="[29]"></a>__rt_lib_shutdown_fini</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry12b.o(.ARM.Collect$$$$0000000E))
-<BR><BR>[Calls]<UL><LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__arm_fini_ (Weak Reference)
+<P><STRONG><a name="[2a]"></a>__rt_lib_shutdown_fini</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry12b.o(.ARM.Collect$$$$0000000E))
+<BR><BR>[Calls]<UL><LI><a href="#[2b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__arm_fini_ (Weak Reference)
 </UL>
 
-<P><STRONG><a name="[40]"></a>__rt_final_cpp</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry10a.o(.ARM.Collect$$$$0000000F))
+<P><STRONG><a name="[54]"></a>__rt_final_cpp</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry10a.o(.ARM.Collect$$$$0000000F))
 
-<P><STRONG><a name="[41]"></a>__rt_final_exit</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry11a.o(.ARM.Collect$$$$00000011))
+<P><STRONG><a name="[55]"></a>__rt_final_exit</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry11a.o(.ARM.Collect$$$$00000011))
 
 <P><STRONG><a name="[0]"></a>Reset_Handler</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, startup_w1251.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> startup_w1251.o(RESET)
@@ -242,92 +243,165 @@ Global Symbols
 <P><STRONG><a name="[11]"></a>UART1_3_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_w1251.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> startup_w1251.o(RESET)
 </UL>
-<P><STRONG><a name="[42]"></a>__aeabi_uidiv</STRONG> (Thumb, 0 bytes, Stack size 12 bytes, uidiv.o(.text), UNUSED)
+<P><STRONG><a name="[56]"></a>__aeabi_uidiv</STRONG> (Thumb, 0 bytes, Stack size 12 bytes, uidiv.o(.text), UNUSED)
 
-<P><STRONG><a name="[3b]"></a>__aeabi_uidivmod</STRONG> (Thumb, 44 bytes, Stack size 12 bytes, uidiv.o(.text))
+<P><STRONG><a name="[4a]"></a>__aeabi_uidivmod</STRONG> (Thumb, 44 bytes, Stack size 12 bytes, uidiv.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = __aeabi_uidivmod
 </UL>
-<BR>[Called By]<UL><LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Uart_Config
+<BR>[Called By]<UL><LI><a href="#[33]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Uart_Config
 </UL>
 
-<P><STRONG><a name="[28]"></a>__scatterload</STRONG> (Thumb, 28 bytes, Stack size 0 bytes, init.o(.text))
-<BR><BR>[Calls]<UL><LI><a href="#[2b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__main_after_scatterload
+<P><STRONG><a name="[2c]"></a>__aeabi_uldivmod</STRONG> (Thumb, 96 bytes, Stack size 48 bytes, uldiv.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[2d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_llsr
+<LI><a href="#[2e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_llsl
 </UL>
-<BR>[Called By]<UL><LI><a href="#[27]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_main_scatterload
+<BR>[Called By]<UL><LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_core
 </UL>
 
-<P><STRONG><a name="[43]"></a>__scatterload_rt2</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, init.o(.text), UNUSED)
+<P><STRONG><a name="[29]"></a>__scatterload</STRONG> (Thumb, 28 bytes, Stack size 0 bytes, init.o(.text))
+<BR><BR>[Calls]<UL><LI><a href="#[2f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__main_after_scatterload
+</UL>
+<BR>[Called By]<UL><LI><a href="#[28]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_main_scatterload
+</UL>
 
-<P><STRONG><a name="[2c]"></a>GPIO_Config</STRONG> (Thumb, 86 bytes, Stack size 16 bytes, uart.o(i.GPIO_Config))
+<P><STRONG><a name="[57]"></a>__scatterload_rt2</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, init.o(.text), UNUSED)
+
+<P><STRONG><a name="[2e]"></a>__aeabi_llsl</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, llshl.o(.text), UNUSED)
+<BR><BR>[Called By]<UL><LI><a href="#[2c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uldivmod
+</UL>
+
+<P><STRONG><a name="[58]"></a>_ll_shift_l</STRONG> (Thumb, 0 bytes, Stack size 8 bytes, llshl.o(.text), UNUSED)
+
+<P><STRONG><a name="[2d]"></a>__aeabi_llsr</STRONG> (Thumb, 34 bytes, Stack size 8 bytes, llushr.o(.text), UNUSED)
+<BR><BR>[Called By]<UL><LI><a href="#[2c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uldivmod
+</UL>
+
+<P><STRONG><a name="[59]"></a>_ll_ushift_r</STRONG> (Thumb, 0 bytes, Stack size 8 bytes, llushr.o(.text), UNUSED)
+
+<P><STRONG><a name="[30]"></a>Boot_Init</STRONG> (Thumb, 20 bytes, Stack size 8 bytes, boot.o(i.Boot_Init))
+<BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = Boot_Init &rArr; GPIO_Config &rArr; GPIO_Init
+</UL>
+<BR>[Calls]<UL><LI><a href="#[33]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Uart_Config
+<LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemClock_Config
+<LI><a href="#[32]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Config
+</UL>
+<BR>[Called By]<UL><LI><a href="#[24]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[32]"></a>GPIO_Config</STRONG> (Thumb, 88 bytes, Stack size 16 bytes, uart.o(i.GPIO_Config))
 <BR><BR>[Stack]<UL><LI>Max Depth = 28<LI>Call Chain = GPIO_Config &rArr; GPIO_Init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[2d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
+<BR>[Calls]<UL><LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
 </UL>
-<BR>[Called By]<UL><LI><a href="#[24]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<BR>[Called By]<UL><LI><a href="#[30]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Boot_Init
 </UL>
 
-<P><STRONG><a name="[2d]"></a>GPIO_Init</STRONG> (Thumb, 66 bytes, Stack size 12 bytes, sc32f10xx_gpio.o(i.GPIO_Init))
+<P><STRONG><a name="[39]"></a>GPIO_Init</STRONG> (Thumb, 66 bytes, Stack size 12 bytes, sc32f10xx_gpio.o(i.GPIO_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = GPIO_Init
 </UL>
-<BR>[Called By]<UL><LI><a href="#[2c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Config
+<BR>[Called By]<UL><LI><a href="#[32]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Config
 </UL>
 
-<P><STRONG><a name="[33]"></a>IAP_Lock</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, iap.o(i.IAP_Lock))
-<BR><BR>[Called By]<UL><LI><a href="#[2e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IAP_TestMode
+<P><STRONG><a name="[3c]"></a>IAP_Lock</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, iap.o(i.IAP_Lock))
+<BR><BR>[Called By]<UL><LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IAP_ProgramWord
 </UL>
 
-<P><STRONG><a name="[32]"></a>IAP_SERASE</STRONG> (Thumb, 44 bytes, Stack size 0 bytes, iap.o(i.IAP_SERASE))
-<BR><BR>[Called By]<UL><LI><a href="#[2e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IAP_TestMode
+<P><STRONG><a name="[38]"></a>IAP_ProgramWord</STRONG> (Thumb, 30 bytes, Stack size 8 bytes, iap.o(i.IAP_ProgramWord))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = IAP_ProgramWord
+</UL>
+<BR>[Calls]<UL><LI><a href="#[3c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IAP_Lock
+<LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IAP_WriteCmd
+<LI><a href="#[3a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IAP_Unlock
+</UL>
+<BR>[Called By]<UL><LI><a href="#[36]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Flash_WriteBuffer
+<LI><a href="#[44]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OTA_SaveInfo
+<LI><a href="#[3f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OTA_CopyBackupToApp
 </UL>
 
-<P><STRONG><a name="[2e]"></a>IAP_TestMode</STRONG> (Thumb, 110 bytes, Stack size 8 bytes, iap.o(i.IAP_TestMode))
-<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = IAP_TestMode
+<P><STRONG><a name="[35]"></a>IAP_SERASE</STRONG> (Thumb, 44 bytes, Stack size 0 bytes, iap.o(i.IAP_SERASE))
+<BR><BR>[Called By]<UL><LI><a href="#[34]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Flash_EraseSectors
 </UL>
-<BR>[Calls]<UL><LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IAP_WriteCmd
-<LI><a href="#[30]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IAP_Unlock
-<LI><a href="#[32]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IAP_SERASE
-<LI><a href="#[33]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IAP_Lock
-<LI><a href="#[2f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Uart_SendByte
+
+<P><STRONG><a name="[3a]"></a>IAP_Unlock</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, iap.o(i.IAP_Unlock))
+<BR><BR>[Called By]<UL><LI><a href="#[3e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;jump_to_flash
+<LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IAP_ProgramWord
+<LI><a href="#[24]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[3b]"></a>IAP_WriteCmd</STRONG> (Thumb, 32 bytes, Stack size 0 bytes, iap.o(i.IAP_WriteCmd))
+<BR><BR>[Called By]<UL><LI><a href="#[3e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;jump_to_flash
+<LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IAP_ProgramWord
+<LI><a href="#[24]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[3d]"></a>Jump_To_App</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, boot.o(i.Jump_To_App))
+<BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = Jump_To_App &rArr; jump_to_flash
+</UL>
+<BR>[Calls]<UL><LI><a href="#[3e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;jump_to_flash
 </UL>
 <BR>[Called By]<UL><LI><a href="#[24]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[30]"></a>IAP_Unlock</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, iap.o(i.IAP_Unlock))
-<BR><BR>[Called By]<UL><LI><a href="#[2e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IAP_TestMode
+<P><STRONG><a name="[3f]"></a>OTA_CopyBackupToApp</STRONG> (Thumb, 168 bytes, Stack size 40 bytes, ota.o(i.OTA_CopyBackupToApp))
+<BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = OTA_CopyBackupToApp &rArr; Flash_EraseSectors
+</UL>
+<BR>[Calls]<UL><LI><a href="#[34]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Flash_EraseSectors
+<LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IAP_ProgramWord
+<LI><a href="#[40]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
+</UL>
+<BR>[Called By]<UL><LI><a href="#[24]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[31]"></a>IAP_WriteCmd</STRONG> (Thumb, 32 bytes, Stack size 0 bytes, iap.o(i.IAP_WriteCmd))
-<BR><BR>[Called By]<UL><LI><a href="#[2e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IAP_TestMode
+<P><STRONG><a name="[41]"></a>OTA_ReceiveBin</STRONG> (Thumb, 234 bytes, Stack size 568 bytes, ota.o(i.OTA_ReceiveBin))
+<BR><BR>[Stack]<UL><LI>Max Depth = 612<LI>Call Chain = OTA_ReceiveBin &rArr; Flash_WriteBuffer &rArr; PackWord
+</UL>
+<BR>[Calls]<UL><LI><a href="#[37]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PackWord
+<LI><a href="#[36]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Flash_WriteBuffer
+<LI><a href="#[34]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Flash_EraseSectors
+<LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Uart_SendByte
+<LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Uart_GetByte
+<LI><a href="#[40]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
+</UL>
+<BR>[Called By]<UL><LI><a href="#[24]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[39]"></a>RCC_APB0Cmd</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, sc32f10xx_rcc.o(i.RCC_APB0Cmd))
-<BR><BR>[Called By]<UL><LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Uart_Config
+<P><STRONG><a name="[44]"></a>OTA_SaveInfo</STRONG> (Thumb, 38 bytes, Stack size 16 bytes, ota.o(i.OTA_SaveInfo))
+<BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = OTA_SaveInfo &rArr; Flash_EraseSectors
+</UL>
+<BR>[Calls]<UL><LI><a href="#[34]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Flash_EraseSectors
+<LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IAP_ProgramWord
+</UL>
+<BR>[Called By]<UL><LI><a href="#[24]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[3a]"></a>RCC_APB0PeriphClockCmd</STRONG> (Thumb, 28 bytes, Stack size 0 bytes, sc32f10xx_rcc.o(i.RCC_APB0PeriphClockCmd))
-<BR><BR>[Called By]<UL><LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Uart_Config
+<P><STRONG><a name="[48]"></a>RCC_APB0Cmd</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, sc32f10xx_rcc.o(i.RCC_APB0Cmd))
+<BR><BR>[Called By]<UL><LI><a href="#[33]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Uart_Config
 </UL>
 
-<P><STRONG><a name="[37]"></a>RCC_HCLKConfig</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, sc32f10xx_rcc.o(i.RCC_HCLKConfig))
-<BR><BR>[Called By]<UL><LI><a href="#[34]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemClock_Config
+<P><STRONG><a name="[49]"></a>RCC_APB0PeriphClockCmd</STRONG> (Thumb, 28 bytes, Stack size 0 bytes, sc32f10xx_rcc.o(i.RCC_APB0PeriphClockCmd))
+<BR><BR>[Called By]<UL><LI><a href="#[33]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Uart_Config
 </UL>
 
-<P><STRONG><a name="[36]"></a>RCC_HIRCCmd</STRONG> (Thumb, 32 bytes, Stack size 0 bytes, sc32f10xx_rcc.o(i.RCC_HIRCCmd))
-<BR><BR>[Called By]<UL><LI><a href="#[34]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemClock_Config
+<P><STRONG><a name="[47]"></a>RCC_HCLKConfig</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, sc32f10xx_rcc.o(i.RCC_HCLKConfig))
+<BR><BR>[Called By]<UL><LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemClock_Config
 </UL>
 
-<P><STRONG><a name="[35]"></a>RCC_SYSCLKSWConfig</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, sc32f10xx_rcc.o(i.RCC_SYSCLKSWConfig))
-<BR><BR>[Called By]<UL><LI><a href="#[34]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemClock_Config
+<P><STRONG><a name="[46]"></a>RCC_HIRCCmd</STRONG> (Thumb, 32 bytes, Stack size 0 bytes, sc32f10xx_rcc.o(i.RCC_HIRCCmd))
+<BR><BR>[Called By]<UL><LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemClock_Config
 </UL>
 
-<P><STRONG><a name="[34]"></a>SystemClock_Config</STRONG> (Thumb, 22 bytes, Stack size 8 bytes, uart.o(i.SystemClock_Config))
+<P><STRONG><a name="[45]"></a>RCC_SYSCLKSWConfig</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, sc32f10xx_rcc.o(i.RCC_SYSCLKSWConfig))
+<BR><BR>[Called By]<UL><LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemClock_Config
+</UL>
+
+<P><STRONG><a name="[31]"></a>SystemClock_Config</STRONG> (Thumb, 22 bytes, Stack size 8 bytes, uart.o(i.SystemClock_Config))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = SystemClock_Config
 </UL>
-<BR>[Calls]<UL><LI><a href="#[35]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_SYSCLKSWConfig
-<LI><a href="#[36]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_HIRCCmd
-<LI><a href="#[37]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_HCLKConfig
+<BR>[Calls]<UL><LI><a href="#[45]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_SYSCLKSWConfig
+<LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_HIRCCmd
+<LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_HCLKConfig
 </UL>
-<BR>[Called By]<UL><LI><a href="#[24]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<BR>[Called By]<UL><LI><a href="#[30]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Boot_Init
 </UL>
 
 <P><STRONG><a name="[25]"></a>SystemInit</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, main.o(i.SystemInit))
@@ -336,45 +410,128 @@ Global Symbols
 <P><STRONG><a name="[10]"></a>UART0_2_IRQHandler</STRONG> (Thumb, 32 bytes, Stack size 0 bytes, uart.o(i.UART0_2_IRQHandler))
 <BR>[Address Reference Count : 1]<UL><LI> startup_w1251.o(RESET)
 </UL>
-<P><STRONG><a name="[38]"></a>Uart_Config</STRONG> (Thumb, 76 bytes, Stack size 8 bytes, uart.o(i.Uart_Config))
+<P><STRONG><a name="[33]"></a>Uart_Config</STRONG> (Thumb, 76 bytes, Stack size 8 bytes, uart.o(i.Uart_Config))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = Uart_Config &rArr; __aeabi_uidivmod
 </UL>
-<BR>[Calls]<UL><LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uidivmod
-<LI><a href="#[3a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB0PeriphClockCmd
-<LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB0Cmd
+<BR>[Calls]<UL><LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uidivmod
+<LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB0PeriphClockCmd
+<LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB0Cmd
 </UL>
-<BR>[Called By]<UL><LI><a href="#[24]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<BR>[Called By]<UL><LI><a href="#[30]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Boot_Init
 </UL>
 
-<P><STRONG><a name="[2f]"></a>Uart_SendByte</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, uart.o(i.Uart_SendByte))
-<BR><BR>[Called By]<UL><LI><a href="#[2e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IAP_TestMode
+<P><STRONG><a name="[42]"></a>Uart_GetByte</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, uart.o(i.Uart_GetByte))
+<BR><BR>[Called By]<UL><LI><a href="#[41]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OTA_ReceiveBin
 <LI><a href="#[24]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[44]"></a>__scatterload_copy</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_copy), UNUSED)
-
-<P><STRONG><a name="[45]"></a>__scatterload_null</STRONG> (Thumb, 2 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_null), UNUSED)
-
-<P><STRONG><a name="[46]"></a>__scatterload_zeroinit</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_zeroinit), UNUSED)
-
-<P><STRONG><a name="[24]"></a>main</STRONG> (Thumb, 30 bytes, Stack size 0 bytes, main.o(i.main))
-<BR><BR>[Stack]<UL><LI>Max Depth = 28<LI>Call Chain = main &rArr; GPIO_Config &rArr; GPIO_Init
+<P><STRONG><a name="[43]"></a>Uart_SendByte</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, uart.o(i.Uart_SendByte))
+<BR><BR>[Called By]<UL><LI><a href="#[41]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OTA_ReceiveBin
 </UL>
-<BR>[Calls]<UL><LI><a href="#[2f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Uart_SendByte
-<LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Uart_Config
-<LI><a href="#[34]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemClock_Config
-<LI><a href="#[2e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IAP_TestMode
-<LI><a href="#[2c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Config
+
+<P><STRONG><a name="[4b]"></a>__0printf$8</STRONG> (Thumb, 24 bytes, Stack size 24 bytes, printf8.o(i.__0printf$8), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_core
+</UL>
+
+<P><STRONG><a name="[5a]"></a>__1printf$8</STRONG> (Thumb, 0 bytes, Stack size 24 bytes, printf8.o(i.__0printf$8), UNUSED)
+
+<P><STRONG><a name="[40]"></a>__2printf</STRONG> (Thumb, 0 bytes, Stack size 24 bytes, printf8.o(i.__0printf$8))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = __2printf
+</UL>
+<BR>[Called By]<UL><LI><a href="#[41]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OTA_ReceiveBin
+<LI><a href="#[3f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OTA_CopyBackupToApp
+<LI><a href="#[24]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[5b]"></a>__scatterload_copy</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_copy), UNUSED)
+
+<P><STRONG><a name="[5c]"></a>__scatterload_null</STRONG> (Thumb, 2 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_null), UNUSED)
+
+<P><STRONG><a name="[5d]"></a>__scatterload_zeroinit</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_zeroinit), UNUSED)
+
+<P><STRONG><a name="[27]"></a>fputc</STRONG> (Thumb, 30 bytes, Stack size 0 bytes, uart.o(i.fputc))
+<BR>[Address Reference Count : 1]<UL><LI> printf8.o(i.__0printf$8)
+</UL>
+<P><STRONG><a name="[3e]"></a>jump_to_flash</STRONG> (Thumb, 56 bytes, Stack size 4 bytes, iap.o(i.jump_to_flash))
+<BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = jump_to_flash
+</UL>
+<BR>[Calls]<UL><LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IAP_WriteCmd
+<LI><a href="#[3a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IAP_Unlock
+</UL>
+<BR>[Called By]<UL><LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Jump_To_App
+</UL>
+
+<P><STRONG><a name="[24]"></a>main</STRONG> (Thumb, 214 bytes, Stack size 16 bytes, main.o(i.main))
+<BR><BR>[Stack]<UL><LI>Max Depth = 628<LI>Call Chain = main &rArr; OTA_ReceiveBin &rArr; Flash_WriteBuffer &rArr; PackWord
+</UL>
+<BR>[Calls]<UL><LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Uart_GetByte
+<LI><a href="#[44]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OTA_SaveInfo
+<LI><a href="#[41]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OTA_ReceiveBin
+<LI><a href="#[3f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OTA_CopyBackupToApp
+<LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Jump_To_App
+<LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IAP_WriteCmd
+<LI><a href="#[3a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IAP_Unlock
+<LI><a href="#[30]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Boot_Init
+<LI><a href="#[4f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PackWord
+<LI><a href="#[40]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> entry9a.o(.ARM.Collect$$$$0000000B)
 </UL><P>
 <H3>
 Local Symbols
-</H3><P>
+</H3>
+<P><STRONG><a name="[4f]"></a>PackWord</STRONG> (Thumb, 18 bytes, Stack size 12 bytes, main.o(i.PackWord))
+<BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = PackWord
+</UL>
+<BR>[Called By]<UL><LI><a href="#[24]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[34]"></a>Flash_EraseSectors</STRONG> (Thumb, 34 bytes, Stack size 24 bytes, ota.o(i.Flash_EraseSectors))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = Flash_EraseSectors
+</UL>
+<BR>[Calls]<UL><LI><a href="#[35]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IAP_SERASE
+</UL>
+<BR>[Called By]<UL><LI><a href="#[44]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OTA_SaveInfo
+<LI><a href="#[41]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OTA_ReceiveBin
+<LI><a href="#[3f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OTA_CopyBackupToApp
+</UL>
+
+<P><STRONG><a name="[36]"></a>Flash_WriteBuffer</STRONG> (Thumb, 66 bytes, Stack size 32 bytes, ota.o(i.Flash_WriteBuffer))
+<BR><BR>[Stack]<UL><LI>Max Depth = 44<LI>Call Chain = Flash_WriteBuffer &rArr; PackWord
+</UL>
+<BR>[Calls]<UL><LI><a href="#[37]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PackWord
+<LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IAP_ProgramWord
+</UL>
+<BR>[Called By]<UL><LI><a href="#[41]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OTA_ReceiveBin
+</UL>
+
+<P><STRONG><a name="[37]"></a>PackWord</STRONG> (Thumb, 18 bytes, Stack size 12 bytes, ota.o(i.PackWord))
+<BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = PackWord
+</UL>
+<BR>[Called By]<UL><LI><a href="#[36]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Flash_WriteBuffer
+<LI><a href="#[41]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OTA_ReceiveBin
+</UL>
+
+<P><STRONG><a name="[4c]"></a>_printf_core</STRONG> (Thumb, 1020 bytes, Stack size 104 bytes, printf8.o(i._printf_core), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[2c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uldivmod
+<LI><a href="#[4d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_pre_padding
+<LI><a href="#[4e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_post_padding
+</UL>
+<BR>[Called By]<UL><LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__0printf$8
+</UL>
+
+<P><STRONG><a name="[4e]"></a>_printf_post_padding</STRONG> (Thumb, 32 bytes, Stack size 24 bytes, printf8.o(i._printf_post_padding), UNUSED)
+<BR><BR>[Called By]<UL><LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_core
+</UL>
+
+<P><STRONG><a name="[4d]"></a>_printf_pre_padding</STRONG> (Thumb, 44 bytes, Stack size 40 bytes, printf8.o(i._printf_pre_padding), UNUSED)
+<BR><BR>[Called By]<UL><LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_core
+</UL>
+<P>
 <H3>
 Undefined Global Symbols
 </H3>
-<P><STRONG><a name="[2a]"></a>__arm_fini_</STRONG> (Unknown, 0 bytes, Stack size 0 bytes, UNDEFINED)
-<BR><BR>[Called By]<UL><LI><a href="#[29]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_lib_shutdown_fini
+<P><STRONG><a name="[2b]"></a>__arm_fini_</STRONG> (Unknown, 0 bytes, Stack size 0 bytes, UNDEFINED)
+<BR><BR>[Called By]<UL><LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_lib_shutdown_fini
 </UL>
 <HR></body></html>
