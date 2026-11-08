@@ -1,9 +1,0 @@
-.\objects\sc32f10xx_rcc.o: C\SC32F10xx_rcc.c
-.\objects\sc32f10xx_rcc.o: .\Driver\inc\SC32F10xx_rcc.h
-.\objects\sc32f10xx_rcc.o: .\H\W1251.h
-.\objects\sc32f10xx_rcc.o: .\CMSIS\core_cm0plus.h
-.\objects\sc32f10xx_rcc.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdint.h
-.\objects\sc32f10xx_rcc.o: .\CMSIS\cmsis_version.h
-.\objects\sc32f10xx_rcc.o: .\CMSIS\cmsis_compiler.h
-.\objects\sc32f10xx_rcc.o: .\CMSIS\cmsis_armcc.h
-.\objects\sc32f10xx_rcc.o: .\CMSIS\mpu_armv7.h

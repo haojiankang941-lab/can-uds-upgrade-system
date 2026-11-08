@@ -4,3 +4,25 @@
 # Python
 __pycache__/
 *.py[cod]
+
+# Keil build output
+Objects/
+Listings/
+
+# Keil generated / per-user files
+EventRecorderStub.scvd
+*.uvguix.*
+*.dep
+*.lnp
+*.l2p
+*.crf
+*.o
+*.axf
+*.hex
+*.lst
+*.map
+*.htm
+*.fed
+*._2i
+*.sct
+*_sct.Bak

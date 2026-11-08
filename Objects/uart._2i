@@ -1,6 +1,0 @@
---c99 -c --cpu Cortex-M0+ -D__MICROLIB --li -g -O0 --apcs=interwork --split_sections -I .\H -I .\CMSIS -I ..\W7901 -I .\Driver\inc
--I D:\CAN”≈ªØ\BOOT\BOOT\RTE
--I D:\keil5\ARM\PACK\ARM\CMSIS\5.6.0\Device\ARM\ARMCM0plus\Include
--I D:\keil5\ARM\CMSIS\Include
--D__UVISION_VERSION="518" -DARMCM0P
--o .\objects\uart.o --omf_browse .\objects\uart.crf --depend .\objects\uart.d --feedback ".\Objects\WDT_Test.fed" "C\Uart.c"

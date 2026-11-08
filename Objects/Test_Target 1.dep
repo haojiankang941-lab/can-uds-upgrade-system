@@ -1,167 +1,0 @@
-Dependencies for Project 'Test', Target 'Target 1': (DO NOT MODIFY !)
-F (.\C\main.C)(0x6AEC3C04)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB --li -g -O0 --apcs=interwork --split_sections -I .\H -I .\CMSIS -I ..\W7901 -I .\Driver\inc-I D:\CAN优化\BOOT\BOOT\RTE-I D:\keil5\ARM\PACK\ARM\CMSIS\5.6.0\Device\ARM\ARMCM0plus\Include-I D:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="518" -DARMCM0P-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
-I (.\H\main.h)(0x6A55FE98)
-I (.\H\W1251.h)(0x6AE8BA84)
-I (.\CMSIS\core_cm0plus.h)(0x5D12171E)
-I (D:\keil5\ARM\ARMCC\include\stdint.h)(0x55DB2B80)
-I (.\CMSIS\cmsis_version.h)(0x5D12171E)
-I (.\CMSIS\cmsis_compiler.h)(0x5D12171E)
-I (.\CMSIS\cmsis_armcc.h)(0x5D12171E)
-I (.\CMSIS\mpu_armv7.h)(0x5D12171E)
-I (.\Driver\inc\SC32F10xx_rcc.h)(0x6AE8BA87)
-I (.\Driver\inc\SC32F10xx_gpio.h)(0x68E77814)
-I (D:\keil5\ARM\ARMCC\include\stdio.h)(0x55DB2B76)
-I (.\H\iap.h)(0x6A56E89C)
-I (C\boot.h)(0x6AEC6DA6)
-I (.\H\ota_flash.h)(0x6AEC6D0F)
-I (.\H\boot_can.h)(0x6AE8BA9F)
-I (.\H\isotp.h)(0x6AE8BAC2)
-I (.\H\uds.h)(0x6AEC3BD7)
-I (.\H\lcd_ui.h)(0x6AEC3BC0)
-I (.\H\log.h)(0x6AEC3D0A)
-F (.\C\Uart.c)(0x6AE8BCB6)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB --li -g -O0 --apcs=interwork --split_sections -I .\H -I .\CMSIS -I ..\W7901 -I .\Driver\inc-I D:\CAN优化\BOOT\BOOT\RTE-I D:\keil5\ARM\PACK\ARM\CMSIS\5.6.0\Device\ARM\ARMCM0plus\Include-I D:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="518" -DARMCM0P-o .\objects\uart.o --omf_browse .\objects\uart.crf --depend .\objects\uart.d)
-I (.\H\main.h)(0x6A55FE98)
-I (.\H\W1251.h)(0x6AE8BA84)
-I (.\CMSIS\core_cm0plus.h)(0x5D12171E)
-I (D:\keil5\ARM\ARMCC\include\stdint.h)(0x55DB2B80)
-I (.\CMSIS\cmsis_version.h)(0x5D12171E)
-I (.\CMSIS\cmsis_compiler.h)(0x5D12171E)
-I (.\CMSIS\cmsis_armcc.h)(0x5D12171E)
-I (.\CMSIS\mpu_armv7.h)(0x5D12171E)
-I (.\Driver\inc\SC32F10xx_rcc.h)(0x6AE8BA87)
-I (.\Driver\inc\SC32F10xx_gpio.h)(0x68E77814)
-I (D:\keil5\ARM\ARMCC\include\stdio.h)(0x55DB2B76)
-I (.\H\iap.h)(0x6A56E89C)
-F (.\C\iap.c)(0x6A589F0A)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB --li -g -O0 --apcs=interwork --split_sections -I .\H -I .\CMSIS -I ..\W7901 -I .\Driver\inc-I D:\CAN优化\BOOT\BOOT\RTE-I D:\keil5\ARM\PACK\ARM\CMSIS\5.6.0\Device\ARM\ARMCM0plus\Include-I D:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="518" -DARMCM0P-o .\objects\iap.o --omf_browse .\objects\iap.crf --depend .\objects\iap.d)
-I (.\H\iap.h)(0x6A56E89C)
-I (D:\keil5\ARM\ARMCC\include\stdint.h)(0x55DB2B80)
-I (.\H\main.h)(0x6A55FE98)
-I (.\H\W1251.h)(0x6AE8BA84)
-I (.\CMSIS\core_cm0plus.h)(0x5D12171E)
-I (.\CMSIS\cmsis_version.h)(0x5D12171E)
-I (.\CMSIS\cmsis_compiler.h)(0x5D12171E)
-I (.\CMSIS\cmsis_armcc.h)(0x5D12171E)
-I (.\CMSIS\mpu_armv7.h)(0x5D12171E)
-I (.\Driver\inc\SC32F10xx_rcc.h)(0x6AE8BA87)
-I (.\Driver\inc\SC32F10xx_gpio.h)(0x68E77814)
-I (D:\keil5\ARM\ARMCC\include\stdio.h)(0x55DB2B76)
-F (.\H\iap.h)(0x6A56E89C)()
-F (.\C\boot.c)(0x6AEC3BFF)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB --li -g -O0 --apcs=interwork --split_sections -I .\H -I .\CMSIS -I ..\W7901 -I .\Driver\inc-I D:\CAN优化\BOOT\BOOT\RTE-I D:\keil5\ARM\PACK\ARM\CMSIS\5.6.0\Device\ARM\ARMCM0plus\Include-I D:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="518" -DARMCM0P-o .\objects\boot.o --omf_browse .\objects\boot.crf --depend .\objects\boot.d)
-I (C\boot.h)(0x6AEC6DA6)
-I (D:\keil5\ARM\ARMCC\include\stdint.h)(0x55DB2B80)
-I (.\H\ota_flash.h)(0x6AEC6D0F)
-I (.\H\iap.h)(0x6A56E89C)
-I (.\H\W1251.h)(0x6AE8BA84)
-I (.\CMSIS\core_cm0plus.h)(0x5D12171E)
-I (.\CMSIS\cmsis_version.h)(0x5D12171E)
-I (.\CMSIS\cmsis_compiler.h)(0x5D12171E)
-I (.\CMSIS\cmsis_armcc.h)(0x5D12171E)
-I (.\CMSIS\mpu_armv7.h)(0x5D12171E)
-I (.\H\log.h)(0x6AEC3D0A)
-I (D:\keil5\ARM\ARMCC\include\stdio.h)(0x55DB2B76)
-I (.\H\boot_can.h)(0x6AE8BA9F)
-F (.\C\boot.h)(0x6AEC6DA6)()
-F (.\C\ota.h)(0x6A5723E2)()
-F (.\C\boot_can.c)(0x6AE8BCC7)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB --li -g -O0 --apcs=interwork --split_sections -I .\H -I .\CMSIS -I ..\W7901 -I .\Driver\inc-I D:\CAN优化\BOOT\BOOT\RTE-I D:\keil5\ARM\PACK\ARM\CMSIS\5.6.0\Device\ARM\ARMCM0plus\Include-I D:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="518" -DARMCM0P-o .\objects\boot_can.o --omf_browse .\objects\boot_can.crf --depend .\objects\boot_can.d)
-I (.\H\boot_can.h)(0x6AE8BA9F)
-I (D:\keil5\ARM\ARMCC\include\stdint.h)(0x55DB2B80)
-I (.\H\W1251.h)(0x6AE8BA84)
-I (.\CMSIS\core_cm0plus.h)(0x5D12171E)
-I (.\CMSIS\cmsis_version.h)(0x5D12171E)
-I (.\CMSIS\cmsis_compiler.h)(0x5D12171E)
-I (.\CMSIS\cmsis_armcc.h)(0x5D12171E)
-I (.\CMSIS\mpu_armv7.h)(0x5D12171E)
-I (.\Driver\inc\SC32F11xx_can.h)(0x6AE8BA6E)
-I (.\Driver\inc\SC32F10xx_gpio.h)(0x68E77814)
-I (.\Driver\inc\SC32F10xx_rcc.h)(0x6AE8BA87)
-F (.\H\boot_can.h)(0x6AE8BA9F)()
-F (.\C\isotp.c)(0x6AE8BCFE)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB --li -g -O0 --apcs=interwork --split_sections -I .\H -I .\CMSIS -I ..\W7901 -I .\Driver\inc-I D:\CAN优化\BOOT\BOOT\RTE-I D:\keil5\ARM\PACK\ARM\CMSIS\5.6.0\Device\ARM\ARMCM0plus\Include-I D:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="518" -DARMCM0P-o .\objects\isotp.o --omf_browse .\objects\isotp.crf --depend .\objects\isotp.d)
-I (.\H\isotp.h)(0x6AE8BAC2)
-I (D:\keil5\ARM\ARMCC\include\stdint.h)(0x55DB2B80)
-I (.\H\boot_can.h)(0x6AE8BA9F)
-I (.\H\uds.h)(0x6AEC3BD7)
-I (D:\keil5\ARM\ARMCC\include\string.h)(0x55DB2B78)
-F (.\H\isotp.h)(0x6AE8BAC2)()
-F (.\C\uds.c)(0x6AEC6DEC)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB --li -g -O0 --apcs=interwork --split_sections -I .\H -I .\CMSIS -I ..\W7901 -I .\Driver\inc-I D:\CAN优化\BOOT\BOOT\RTE-I D:\keil5\ARM\PACK\ARM\CMSIS\5.6.0\Device\ARM\ARMCM0plus\Include-I D:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="518" -DARMCM0P-o .\objects\uds.o --omf_browse .\objects\uds.crf --depend .\objects\uds.d)
-I (.\H\uds.h)(0x6AEC3BD7)
-I (D:\keil5\ARM\ARMCC\include\stdint.h)(0x55DB2B80)
-I (.\H\isotp.h)(0x6AE8BAC2)
-I (.\H\boot_can.h)(0x6AE8BA9F)
-I (.\H\ota_flash.h)(0x6AEC6D0F)
-I (C\boot.h)(0x6AEC6DA6)
-I (.\H\iap.h)(0x6A56E89C)
-I (.\H\W1251.h)(0x6AE8BA84)
-I (.\CMSIS\core_cm0plus.h)(0x5D12171E)
-I (.\CMSIS\cmsis_version.h)(0x5D12171E)
-I (.\CMSIS\cmsis_compiler.h)(0x5D12171E)
-I (.\CMSIS\cmsis_armcc.h)(0x5D12171E)
-I (.\CMSIS\mpu_armv7.h)(0x5D12171E)
-I (.\H\lcd.h)(0x6AEC3B9F)
-I (.\H\lcd_ui.h)(0x6AEC3BC0)
-I (.\H\log.h)(0x6AEC3D0A)
-I (D:\keil5\ARM\ARMCC\include\stdio.h)(0x55DB2B76)
-I (D:\keil5\ARM\ARMCC\include\string.h)(0x55DB2B78)
-F (.\H\uds.h)(0x6AEC3BD7)()
-F (.\C\ota_flash.c)(0x6AEC6D24)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB --li -g -O0 --apcs=interwork --split_sections -I .\H -I .\CMSIS -I ..\W7901 -I .\Driver\inc-I D:\CAN优化\BOOT\BOOT\RTE-I D:\keil5\ARM\PACK\ARM\CMSIS\5.6.0\Device\ARM\ARMCM0plus\Include-I D:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="518" -DARMCM0P-o .\objects\ota_flash.o --omf_browse .\objects\ota_flash.crf --depend .\objects\ota_flash.d)
-I (.\H\ota_flash.h)(0x6AEC6D0F)
-I (D:\keil5\ARM\ARMCC\include\stdint.h)(0x55DB2B80)
-I (C\boot.h)(0x6AEC6DA6)
-I (.\H\iap.h)(0x6A56E89C)
-I (.\H\W1251.h)(0x6AE8BA84)
-I (.\CMSIS\core_cm0plus.h)(0x5D12171E)
-I (.\CMSIS\cmsis_version.h)(0x5D12171E)
-I (.\CMSIS\cmsis_compiler.h)(0x5D12171E)
-I (.\CMSIS\cmsis_armcc.h)(0x5D12171E)
-I (.\CMSIS\mpu_armv7.h)(0x5D12171E)
-F (.\H\ota_flash.h)(0x6AEC6D0F)()
-F (.\C\lcd.c)(0x6AEC3D44)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB --li -g -O0 --apcs=interwork --split_sections -I .\H -I .\CMSIS -I ..\W7901 -I .\Driver\inc-I D:\CAN优化\BOOT\BOOT\RTE-I D:\keil5\ARM\PACK\ARM\CMSIS\5.6.0\Device\ARM\ARMCM0plus\Include-I D:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="518" -DARMCM0P-o .\objects\lcd.o --omf_browse .\objects\lcd.crf --depend .\objects\lcd.d)
-I (.\H\lcd.h)(0x6AEC3B9F)
-I (D:\keil5\ARM\ARMCC\include\stdint.h)(0x55DB2B80)
-I (.\H\boot_can.h)(0x6AE8BA9F)
-I (.\H\W1251.h)(0x6AE8BA84)
-I (.\CMSIS\core_cm0plus.h)(0x5D12171E)
-I (.\CMSIS\cmsis_version.h)(0x5D12171E)
-I (.\CMSIS\cmsis_compiler.h)(0x5D12171E)
-I (.\CMSIS\cmsis_armcc.h)(0x5D12171E)
-I (.\CMSIS\mpu_armv7.h)(0x5D12171E)
-I (.\Driver\inc\SC32F10xx_rcc.h)(0x6AE8BA87)
-F (.\H\lcd.h)(0x6AEC3B9F)()
-F (.\C\lcd_ui.c)(0x6AEC3BCE)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB --li -g -O0 --apcs=interwork --split_sections -I .\H -I .\CMSIS -I ..\W7901 -I .\Driver\inc-I D:\CAN优化\BOOT\BOOT\RTE-I D:\keil5\ARM\PACK\ARM\CMSIS\5.6.0\Device\ARM\ARMCM0plus\Include-I D:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="518" -DARMCM0P-o .\objects\lcd_ui.o --omf_browse .\objects\lcd_ui.crf --depend .\objects\lcd_ui.d)
-I (.\H\lcd_ui.h)(0x6AEC3BC0)
-I (D:\keil5\ARM\ARMCC\include\stdint.h)(0x55DB2B80)
-I (.\H\uds.h)(0x6AEC3BD7)
-I (.\H\lcd.h)(0x6AEC3B9F)
-I (.\H\ota_flash.h)(0x6AEC6D0F)
-I (C\boot.h)(0x6AEC6DA6)
-I (.\H\boot_can.h)(0x6AE8BA9F)
-F (.\H\lcd_ui.h)(0x6AEC3BC0)()
-F (.\H\log.h)(0x6AEC3D0A)()
-F (.\startup_w1251.s)(0x6AEC3CD0)(--cpu Cortex-M0+ --li -g --apcs=interwork --pd "__MICROLIB SETA 1"-I D:\CAN优化\BOOT\BOOT\RTE-I D:\keil5\ARM\PACK\ARM\CMSIS\5.6.0\Device\ARM\ARMCM0plus\Include-I D:\keil5\ARM\CMSIS\Include--pd "__UVISION_VERSION SETA 518" --pd "ARMCM0P SETA 1"--list .\listings\startup_w1251.lst --xref -o .\objects\startup_w1251.o --depend .\objects\startup_w1251.d)
-F (.\C\SC32F10xx_rcc.c)(0x65741250)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB --li -g -O0 --apcs=interwork --split_sections -I .\H -I .\CMSIS -I ..\W7901 -I .\Driver\inc-I D:\CAN优化\BOOT\BOOT\RTE-I D:\keil5\ARM\PACK\ARM\CMSIS\5.6.0\Device\ARM\ARMCM0plus\Include-I D:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="518" -DARMCM0P-o .\objects\sc32f10xx_rcc.o --omf_browse .\objects\sc32f10xx_rcc.crf --depend .\objects\sc32f10xx_rcc.d)
-I (.\Driver\inc\SC32F10xx_rcc.h)(0x6AE8BA87)
-I (.\H\W1251.h)(0x6AE8BA84)
-I (.\CMSIS\core_cm0plus.h)(0x5D12171E)
-I (D:\keil5\ARM\ARMCC\include\stdint.h)(0x55DB2B80)
-I (.\CMSIS\cmsis_version.h)(0x5D12171E)
-I (.\CMSIS\cmsis_compiler.h)(0x5D12171E)
-I (.\CMSIS\cmsis_armcc.h)(0x5D12171E)
-I (.\CMSIS\mpu_armv7.h)(0x5D12171E)
-F (.\Driver\src\SC32F10xx_gpio.c)(0x62EA37EA)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB --li -g -O0 --apcs=interwork --split_sections -I .\H -I .\CMSIS -I ..\W7901 -I .\Driver\inc-I D:\CAN优化\BOOT\BOOT\RTE-I D:\keil5\ARM\PACK\ARM\CMSIS\5.6.0\Device\ARM\ARMCM0plus\Include-I D:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="518" -DARMCM0P-o .\objects\sc32f10xx_gpio.o --omf_browse .\objects\sc32f10xx_gpio.crf --depend .\objects\sc32f10xx_gpio.d)
-I (.\Driver\inc\SC32F10xx_gpio.h)(0x68E77814)
-I (.\H\W1251.h)(0x6AE8BA84)
-I (.\CMSIS\core_cm0plus.h)(0x5D12171E)
-I (D:\keil5\ARM\ARMCC\include\stdint.h)(0x55DB2B80)
-I (.\CMSIS\cmsis_version.h)(0x5D12171E)
-I (.\CMSIS\cmsis_compiler.h)(0x5D12171E)
-I (.\CMSIS\cmsis_armcc.h)(0x5D12171E)
-I (.\CMSIS\mpu_armv7.h)(0x5D12171E)
-F (.\Driver\src\SC32F11xx_can.c)(0x6AE8BA6E)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB --li -g -O0 --apcs=interwork --split_sections -I .\H -I .\CMSIS -I ..\W7901 -I .\Driver\inc-I D:\CAN优化\BOOT\BOOT\RTE-I D:\keil5\ARM\PACK\ARM\CMSIS\5.6.0\Device\ARM\ARMCM0plus\Include-I D:\keil5\ARM\CMSIS\Include-D__UVISION_VERSION="518" -DARMCM0P-o .\objects\sc32f11xx_can.o --omf_browse .\objects\sc32f11xx_can.crf --depend .\objects\sc32f11xx_can.d)
-I (.\Driver\inc\SC32F11xx_can.h)(0x6AE8BA6E)
-I (.\H\W1251.h)(0x6AE8BA84)
-I (.\CMSIS\core_cm0plus.h)(0x5D12171E)
-I (D:\keil5\ARM\ARMCC\include\stdint.h)(0x55DB2B80)
-I (.\CMSIS\cmsis_version.h)(0x5D12171E)
-I (.\CMSIS\cmsis_compiler.h)(0x5D12171E)
-I (.\CMSIS\cmsis_armcc.h)(0x5D12171E)
-I (.\CMSIS\mpu_armv7.h)(0x5D12171E)
-F (.\H\W1251.h)(0x6AE8BA84)()
