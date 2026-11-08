@@ -18,6 +18,8 @@
 #include "boot_can.h"
 #include "isotp.h"
 #include "uds.h"
+#include "lcd_ui.h"
+#include "log.h"
 
 /**
  * @brief  Set the vector table to the boot region.
@@ -36,13 +38,22 @@ int main(void)
 
     Boot_Init();
 
+    LOGF("boot start flag=%u app_valid=%u",
+         (unsigned)OTA_CheckRequest(), (unsigned)OTA_IsAppValid());
+
     /* Enter UDS mode when APP requested an upgrade, or when there is no
      * valid APP to jump to (recovery). */
     if ((OTA_CheckRequest() != 0U) || (OTA_IsAppValid() == 0U))
     {
+        uint32_t now;
+
         BootCan_Init();
         IsoTp_Init();
         Uds_Init();
+
+        /* Panel init is asynchronous: CAN keeps being serviced. */
+        Lcd_UiInit();
+        LOG("enter UDS mode");
 
         for (;;)
         {
@@ -51,11 +62,14 @@ int main(void)
                 IsoTp_RxFrame(&frame);
             }
 
-            IsoTp_Poll(BootCan_GetMs());
-            Uds_Poll(BootCan_GetMs());
+            now = BootCan_GetMs();
+            IsoTp_Poll(now);
+            Uds_Poll(now);
+            Lcd_UiPoll(now);
         }
     }
 
+    LOG("jump to app");
     Jump_To_App();
 
     while (1)

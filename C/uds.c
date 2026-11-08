@@ -14,6 +14,9 @@
 #include "boot.h"
 #include "iap.h"
 #include "W1251.h"
+#include "lcd.h"
+#include "lcd_ui.h"
+#include "log.h"
 #include <string.h>
 
 /* Sessions */
@@ -25,6 +28,7 @@
 #define NRC_SERVICE_NOT_SUPPORTED        0x11U
 #define NRC_SUBFUNCTION_NOT_SUPPORTED    0x12U
 #define NRC_INCORRECT_LENGTH             0x13U
+#define NRC_RESPONSE_TOO_LONG            0x14U
 #define NRC_CONDITIONS_NOT_CORRECT       0x22U
 #define NRC_REQUEST_SEQUENCE_ERROR       0x24U
 #define NRC_REQUEST_OUT_OF_RANGE         0x31U
@@ -58,6 +62,9 @@ static uint8_t  s_next_bsc;
 static uint32_t s_crc;
 static uint8_t  s_complete;
 
+/* Read-only snapshot for the LCD status screen. */
+static UdsUiStateTypeDef s_ui_state;
+
 /* -------------------------------------------------------------------------- */
 /* Helpers                                                                    */
 /* -------------------------------------------------------------------------- */
@@ -83,6 +90,7 @@ static void Uds_SendNegative(uint8_t sid, uint8_t nrc)
     r[1] = sid;
     r[2] = nrc;
     Uds_Send(r, 3);
+    LOGF("NRC sid=0x%02X nrc=0x%02X", (unsigned)sid, (unsigned)nrc);
 }
 
 /* Send 0x78 for a specific service. */
@@ -137,6 +145,16 @@ static void Uds_Service10(const uint8_t *msg, uint16_t len)
         s_security = 0U;
     }
 
+    if (sub == UDS_SESSION_PROGRAMMING)
+    {
+        s_ui_state = UDS_UI_PROGRAMMING;
+    }
+    else if (sub == UDS_SESSION_DEFAULT)
+    {
+        s_ui_state = UDS_UI_IDLE;
+    }
+    LOGF("session 0x%02X", (unsigned)sub);
+
     if ((msg[1] & 0x80U) == 0U)
     {
         r[0] = 0x50U;
@@ -147,6 +165,176 @@ static void Uds_Service10(const uint8_t *msg, uint16_t len)
         r[5] = 0xF4U;
         Uds_Send(r, 6);
     }
+}
+
+/* -------------------------------------------------------------------------- */
+/* 0x22 ReadDataByIdentifier                                                  */
+/* -------------------------------------------------------------------------- */
+
+#define UDS_DID_BOOT_VERSION   0x0100U
+#define UDS_DID_BOOT_DATE      0x0101U
+#define UDS_DID_APP_VERSION    0x0102U
+#define UDS_DID_APP_DATE       0x0103U
+#define UDS_DID_APP_SIZE       0x0104U
+#define UDS_DID_APP_CRC        0x0105U
+#define UDS_DID_FLASH_STATUS   0x0106U
+
+#define UDS_DID_ACTIVE_SESSION 0xF186U
+#define UDS_DID_PART_NUMBER    0xF187U
+#define UDS_DID_SW_VERSION     0xF189U
+#define UDS_DID_HW_VERSION     0xF191U
+#define UDS_DID_SW_VERSION_2   0xF195U
+
+#define UDS_RESP_MAX           64U
+#define UDS_DID_DATA_MAX       32U
+
+static uint16_t Uds_StrLen(const char *s)
+{
+    uint16_t n = 0U;
+
+    while (s[n] != '\0')
+    {
+        n++;
+    }
+    return n;
+}
+
+static uint16_t Uds_PutU32(uint8_t *out, uint16_t pos, uint32_t v)
+{
+    out[pos++] = (uint8_t)v;
+    out[pos++] = (uint8_t)(v >> 8);
+    out[pos++] = (uint8_t)(v >> 16);
+    out[pos++] = (uint8_t)(v >> 24);
+    return pos;
+}
+
+/* Fill out[] with the data of one DID.  Returns 0 for an unknown DID. */
+static uint8_t Uds_22Value(uint16_t did, uint8_t *out, uint16_t *out_len)
+{
+    OTA_InfoTypeDef info;
+    uint32_t value;
+    uint16_t n;
+    uint8_t  valid;
+
+    switch (did)
+    {
+        case UDS_DID_ACTIVE_SESSION:
+            out[0] = s_session;
+            *out_len = 1U;
+            return 1U;
+
+        case UDS_DID_PART_NUMBER:
+            *out_len = Uds_StrLen(BOOT_PART_NUMBER);
+            memcpy(out, BOOT_PART_NUMBER, *out_len);
+            return 1U;
+
+        case UDS_DID_SW_VERSION:
+        case UDS_DID_SW_VERSION_2:
+            *out_len = Uds_StrLen(BOOT_VERSION_STR);
+            memcpy(out, BOOT_VERSION_STR, *out_len);
+            return 1U;
+
+        case UDS_DID_HW_VERSION:
+            *out_len = Uds_StrLen(BOOT_HW_VERSION_STR);
+            memcpy(out, BOOT_HW_VERSION_STR, *out_len);
+            return 1U;
+
+        case UDS_DID_BOOT_VERSION:
+            out[0] = (uint8_t)BOOT_VERSION_MAJOR;
+            out[1] = (uint8_t)BOOT_VERSION_MINOR;
+            out[2] = (uint8_t)BOOT_VERSION_PATCH;
+            out[3] = 0U;
+            *out_len = 4U;
+            return 1U;
+
+        case UDS_DID_BOOT_DATE:
+            *out_len = Uds_StrLen(BOOT_BUILD_DATE);
+            memcpy(out, BOOT_BUILD_DATE, *out_len);
+            return 1U;
+
+        case UDS_DID_APP_VERSION:
+        case UDS_DID_APP_DATE:
+        case UDS_DID_APP_SIZE:
+        case UDS_DID_APP_CRC:
+            (void)OTA_GetInfo(&info);
+            if (did == UDS_DID_APP_VERSION)
+            {
+                value = info.version;
+            }
+            else if (did == UDS_DID_APP_DATE)
+            {
+                value = info.date;
+            }
+            else if (did == UDS_DID_APP_SIZE)
+            {
+                value = info.size;
+            }
+            else
+            {
+                value = info.crc;
+            }
+            (void)Uds_PutU32(out, 0U, value);
+            *out_len = 4U;
+            return 1U;
+
+        case UDS_DID_FLASH_STATUS:
+            /* valid, state, flash_count, last_result.  state: 0 = no record,
+             * 1 = copy started but never verified, 2 = committed. */
+            valid = OTA_GetInfo(&info);
+            out[0] = valid;
+            out[1] = (uint8_t)((info.magic != OTA_INFO_MAGIC) ? 0U :
+                               ((info.committed == OTA_INFO_COMMITTED) ? 2U : 1U));
+            n = Uds_PutU32(out, 2U, info.flash_count);
+            (void)Uds_PutU32(out, n, info.last_result);
+            *out_len = (uint16_t)(n + 4U);
+            return 1U;
+
+        default:
+            return 0U;
+    }
+}
+
+static void Uds_Service22(const uint8_t *msg, uint16_t len)
+{
+    uint8_t  r[UDS_RESP_MAX];
+    uint8_t  data[UDS_DID_DATA_MAX];
+    uint16_t pos = 0U;
+    uint16_t i = 1U;
+    uint16_t did;
+    uint16_t dlen;
+
+    /* At least one DID, and DIDs always come in pairs of bytes. */
+    if (len < 3U || ((len - 1U) & 1U) != 0U)
+    {
+        Uds_SendNegative(0x22U, NRC_INCORRECT_LENGTH);
+        return;
+    }
+
+    while ((uint16_t)(len - i) >= 2U)
+    {
+        did = (uint16_t)(((uint16_t)msg[i] << 8) | msg[i + 1U]);
+        i = (uint16_t)(i + 2U);
+
+        if (Uds_22Value(did, data, &dlen) == 0U)
+        {
+            Uds_SendNegative(0x22U, NRC_REQUEST_OUT_OF_RANGE);
+            return;
+        }
+
+        if ((uint16_t)(pos + 3U + dlen) > UDS_RESP_MAX)
+        {
+            Uds_SendNegative(0x22U, NRC_RESPONSE_TOO_LONG);
+            return;
+        }
+
+        r[pos++] = 0x62U;
+        r[pos++] = (uint8_t)(did >> 8);
+        r[pos++] = (uint8_t)did;
+        memcpy(&r[pos], data, dlen);
+        pos = (uint16_t)(pos + dlen);
+    }
+
+    Uds_Send(r, pos);
 }
 
 static void Uds_Service11(const uint8_t *msg, uint16_t len)
@@ -241,6 +429,7 @@ static void Uds_Service27(const uint8_t *msg, uint16_t len)
         r[0] = 0x67U;
         r[1] = 0x02U;
         Uds_Send(r, 2);
+        LOG("security unlocked");
     }
     else
     {
@@ -316,14 +505,22 @@ static void Uds_Service34(const uint8_t *msg, uint16_t len)
         return;
     }
 
+    LOGF("download req %lu bytes", (unsigned long)size);
+
     Uds_SendPendingFor(0x34U);
+    s_ui_state = UDS_UI_ERASING;
+    Lcd_UiLongOp(s_ui_state);
 
     if (OTA_Flash_EraseRange(BACKUP_ADDRESS, size) != OTA_OK)
     {
+        s_ui_state = UDS_UI_ERROR;
+        Lcd_UiLongOp(s_ui_state);
         Uds_SendNegative(0x34U, NRC_GENERAL_PROGRAMMING_FAILURE);
         return;
     }
+    LOG("backup erased");
 
+    s_ui_state        = UDS_UI_DOWNLOADING;
     s_download_active = 1U;
     s_size            = size;
     s_offset          = 0U;
@@ -397,14 +594,22 @@ static void Uds_Service36(const uint8_t *msg, uint16_t len)
     s_offset = (uint32_t)(s_offset + data_len);
     s_next_bsc = (uint8_t)((s_next_bsc + 1U) & 0xFFU);
 
+    s_ui_state = UDS_UI_DOWNLOADING;
     if (s_offset == s_size)
     {
         s_complete = 1U;
+        s_ui_state = UDS_UI_TRANSFER_DONE;
     }
 
     r[0] = 0x76U;
     r[1] = bsc;
     Uds_Send(r, 2);
+
+    /* One line per 16 KB, after the response so P2 is never delayed. */
+    if ((s_offset >> 14) != ((s_offset - data_len) >> 14))
+    {
+        LOGF("prog %lu/%lu", (unsigned long)s_offset, (unsigned long)s_size);
+    }
 }
 
 static void Uds_Service37(void)
@@ -421,6 +626,7 @@ static void Uds_Service37(void)
 
     r[0] = 0x77U;
     Uds_Send(r, 1);
+    LOG("transfer exit");
 }
 
 static void Uds_Service31(const uint8_t *msg, uint16_t len)
@@ -461,12 +667,19 @@ static void Uds_Service31(const uint8_t *msg, uint16_t len)
             }
 
             Uds_SendPendingFor(0x31U);
+            s_ui_state = UDS_UI_ERASING;
+            Lcd_UiLongOp(s_ui_state);
+
             if (OTA_Flash_EraseRange(BACKUP_ADDRESS, s_size) != OTA_OK)
             {
+                s_ui_state = UDS_UI_ERROR;
+                Lcd_UiLongOp(s_ui_state);
                 Uds_SendNegative(0x31U, NRC_GENERAL_PROGRAMMING_FAILURE);
                 return;
             }
+            LOG("re-erase done");
 
+            s_ui_state = UDS_UI_DOWNLOADING;
             s_offset   = 0U;
             s_next_bsc = 1U;
             s_crc      = 0xFFFFFFFFUL;
@@ -483,8 +696,12 @@ static void Uds_Service31(const uint8_t *msg, uint16_t len)
                 return;
             }
 
+            s_ui_state = UDS_UI_CRC_CHECK;
+            Lcd_UiLongOp(s_ui_state);
+
             OTA_Flash_Flush();
             crc = OTA_Flash_Crc32(BACKUP_ADDRESS, s_size);
+            LOGF("crc=%08lX", (unsigned long)crc);
 
             if (len >= 8U)
             {
@@ -492,17 +709,24 @@ static void Uds_Service31(const uint8_t *msg, uint16_t len)
                 if (expected != crc)
                 {
                     Uds_SendNegative(0x31U, NRC_REQUEST_OUT_OF_RANGE);
+                    s_ui_state = UDS_UI_CRC_FAIL;
+                    Lcd_UiLongOp(s_ui_state);
                     return;
                 }
             }
             else if (crc != (s_crc ^ 0xFFFFFFFFUL))
             {
                 Uds_SendNegative(0x31U, NRC_REQUEST_OUT_OF_RANGE);
+                s_ui_state = UDS_UI_CRC_FAIL;
+                Lcd_UiLongOp(s_ui_state);
                 return;
             }
 
             r[0] = 0x71U; r[1] = 0x01U; r[2] = 0xFFU; r[3] = 0x01U; r[4] = 0x00U;
             Uds_Send(r, 5);
+            s_ui_state = UDS_UI_CRC_OK;
+            Lcd_UiLongOp(s_ui_state);
+            LOG("crc ok");
         }
         else if (routine == 0xFF02U)     /* activate: copy backup -> app */
         {
@@ -515,9 +739,14 @@ static void Uds_Service31(const uint8_t *msg, uint16_t len)
             OTA_Flash_Flush();
 
             Uds_SendPendingFor(0x31U);
+            s_ui_state = UDS_UI_COPYING;
+            Lcd_UiLongOp(s_ui_state);
+
             crc = OTA_Flash_Crc32(BACKUP_ADDRESS, s_size);
             if (crc != (s_crc ^ 0xFFFFFFFFUL))
             {
+                s_ui_state = UDS_UI_ERROR;
+                Lcd_UiLongOp(s_ui_state);
                 Uds_SendNegative(0x31U, NRC_REQUEST_OUT_OF_RANGE);
                 return;
             }
@@ -533,26 +762,44 @@ static void Uds_Service31(const uint8_t *msg, uint16_t len)
                 date    = 0U;
             }
 
+            /* Record the new image and clear the upgrade request before the
+             * APP is erased.  If power fails during the copy, INFO stays
+             * "staging" (invalid) instead of describing an image that was
+             * never completed, and the request flag does not survive. */
+            OTA_InfoStart(version, date, s_size, crc);
+
             if (OTA_Flash_CopyRange(APP_ADDRESS, BACKUP_ADDRESS, s_size) != OTA_OK)
             {
+                OTA_InfoFinish(OTA_RESULT_COPY_FAIL);
+                s_ui_state = UDS_UI_ERROR;
+                Lcd_UiLongOp(s_ui_state);
                 Uds_SendNegative(0x31U, NRC_GENERAL_PROGRAMMING_FAILURE);
                 return;
             }
+            LOG("copy done");
 
             Uds_SendPendingFor(0x31U);
 
             if (OTA_Flash_Crc32(APP_ADDRESS, s_size) != crc)
             {
+                OTA_InfoFinish(OTA_RESULT_VERIFY_FAIL);
+                s_ui_state = UDS_UI_ERROR;
+                Lcd_UiLongOp(s_ui_state);
                 Uds_SendNegative(0x31U, NRC_GENERAL_PROGRAMMING_FAILURE);
                 return;
             }
+            LOG("app verify ok");
 
-            OTA_SaveInfo(version, date, s_size, crc);
+            OTA_InfoFinish(OTA_RESULT_OK);
 
             r[0] = 0x71U; r[1] = 0x01U; r[2] = 0xFFU; r[3] = 0x02U; r[4] = 0x00U;
             Uds_Send(r, 5);
 
-            BootCan_DelayMs(20U);
+            s_ui_state = UDS_UI_ACTIVATED;
+            Lcd_UiRefreshNow();
+            LOG("activated");
+
+            BootCan_DelayMs(LCD_ACTIVATE_HOLD_MS);
             jump_to_flash();
             while (1)
             {
@@ -635,6 +882,7 @@ void Uds_Init(void)
     s_next_bsc        = 1U;
     s_crc             = 0xFFFFFFFFUL;
     s_complete        = 0U;
+    s_ui_state        = UDS_UI_IDLE;
 }
 
 void Uds_OnMessage(const uint8_t *msg, uint16_t len)
@@ -653,6 +901,7 @@ void Uds_OnMessage(const uint8_t *msg, uint16_t len)
     {
         case 0x10U: Uds_Service10(msg, len); break;
         case 0x11U: Uds_Service11(msg, len); break;
+        case 0x22U: Uds_Service22(msg, len); break;
         case 0x27U: Uds_Service27(msg, len); break;
         case 0x28U: Uds_Service28(msg, len); break;
         case 0x34U: Uds_Service34(msg, len); break;
@@ -682,6 +931,21 @@ void Uds_Poll(uint32_t now_ms)
         {
             s_session  = UDS_SESSION_DEFAULT;
             s_security = 0U;
+            s_ui_state = UDS_UI_IDLE;
         }
     }
+}
+
+void Uds_GetUiStatus(UdsUiStatusTypeDef *out)
+{
+    if (out == 0)
+    {
+        return;
+    }
+
+    out->state    = s_ui_state;
+    out->session  = s_session;
+    out->security = s_security;
+    out->offset   = (s_download_active != 0U) ? s_offset : 0U;
+    out->size     = (s_download_active != 0U) ? s_size : 0U;
 }

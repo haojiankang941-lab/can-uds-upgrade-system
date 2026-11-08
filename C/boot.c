@@ -10,6 +10,7 @@
 #include "ota_flash.h"
 #include "iap.h"
 #include "W1251.h"
+#include "log.h"
 
 /* ================================================================
  * 外部函数声明
@@ -32,8 +33,14 @@ void Boot_Init(void)
     /* 2. 初始化 GPIO（全部输出高，避免浮空） */
     GPIO_Config();
 
-    /* 3. 配置 UART0（用于与 PC 通信接收 BIN） */
+    /* 3. 配置 UART0。
+     *    日志关闭时保持原 9600；日志打开时用 115200，避免阻塞输出
+     *    拖慢 UDS 响应。 */
+#if BOOT_LOG_ENABLE
+    Uart_Config(BOOT_LOG_BAUD);
+#else
     Uart_Config(UART_BAUDRATE);
+#endif
 }
 
 /**

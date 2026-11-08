@@ -3,87 +3,106 @@
 <pre>
 <h1>礦ision Build Log</h1>
 <h2>Tool Versions:</h2>
-IDE-Version: μVision V5.38.0.0
-Copyright (C) 2022 ARM Ltd and ARM Germany GmbH. All rights reserved.
-License Information: A SOC-HJK, A, LIC=03C6R-KKIPH-124LE-5T3QK-P11VG-IPP7T
+IDE-Version: μVision V5.18a
+Copyright (C) 2016 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: A hi, A, LIC=VGXG8-3ZPAG-56ZQ2-9UZYS-09QM1-WCGPR
  
 Tool Versions:
-Toolchain:       MDK-ARM Plus  Version: 5.36.0.0
-Toolchain Path:  D:\KEIL5\ARM\ARMCC\Bin
-C Compiler:      Armcc.exe V5.06 update 7 (build 960)
-Assembler:       Armasm.exe V5.06 update 7 (build 960)
-Linker/Locator:  ArmLink.exe V5.06 update 7 (build 960)
-Library Manager: ArmAr.exe V5.06 update 7 (build 960)
-Hex Converter:   FromElf.exe V5.06 update 7 (build 960)
-CPU DLL:         SARMCM3.DLL V5.36.0.0
-Dialog DLL:      DARMCM1.DLL V1.19.4.0
-Target DLL:      SOC_MDK_Driver\SOC_MDK_Driver.dll V1.00
-Dialog DLL:      TARMCM1.DLL V1.14.4.0
+Toolchain:       MDK-ARM Standard  Version: 5.18a
+Toolchain Path:  D:\keil5\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.06 update 1 (build 61)
+Assembler:       Armasm.exe V5.06 update 1 (build 61)
+Linker/Locator:  ArmLink.exe V5.06 update 1 (build 61)
+Library Manager: ArmAr.exe V5.06 update 1 (build 61)
+Hex Converter:   FromElf.exe V5.06 update 1 (build 61)
+CPU DLL:         SARMCM3.DLL V5.18a
+Dialog DLL:      DARMCM1.DLL V1.12.0.0
+    Target DLL: SOC_MDK_Driver\SOC_MDK_Driver.dll
+Dialog DLL:      TARMCM1.DLL V1.9.0.0
  
 <h2>Project:</h2>
-D:\1___IC\W1251_OTA\BOOT\Test.uvprojx
-Project File Date:  07/15/2026
+D:\CAN优化\BOOT\BOOT\Test.uvprojx
+Project File Date:  11/05/2026
 
 <h2>Output:</h2>
-*** Using Compiler 'V5.06 update 7 (build 960)', folder: 'D:\KEIL5\ARM\ARMCC\Bin'
-Rebuild target 'Target 1'
+*** Using Compiler 'V5.06 update 1 (build 61)', folder: 'D:\keil5\ARM\ARMCC\Bin'
+Build target 'Target 1'
 Clean started - Project: 'Test'
    deleting intermediate output files for target 'Target 1'
-Clean done
 compiling main.C...
 compiling Uart.c...
 compiling iap.c...
 C\iap.c(17): warning:  #61-D: integer operation result is out of range
-    IAP->IAP_CON |= IAP_CON_LOCK;
+    
+AP->IAP_CON |= 
+AP_CON_LOCK;
 C\iap.c(17): warning:  #68-D: integer conversion resulted in a change of sign
-    IAP->IAP_CON |= IAP_CON_LOCK;
+    
+AP->IAP_CON |= 
+AP_CON_LOCK;
 C\iap.c: 2 warnings, 0 errors
 compiling boot.c...
-compiling ota.c...
-C\ota.c(205): warning:  #177-D: variable "wordCount"  was declared but never referenced
-      uint32_t wordCount;
-C\ota.c: 1 warning, 0 errors
+compiling boot_can.c...
+compiling isotp.c...
+compiling uds.c...
+compiling ota_flash.c...
+compiling lcd.c...
+compiling lcd_ui.c...
 assembling startup_w1251.s...
 compiling SC32F10xx_rcc.c...
 compiling SC32F10xx_gpio.c...
+compiling SC32F11xx_can.c...
+Driver\src\SC32F11xx_can.c(535): warning:  #61-D: integer operation result is out of range
+                CANx->CAN_CFG_STAT |= 
+AN_CFG_STAT_SACK;
+Driver\src\SC32F11xx_can.c(535): warning:  #68-D: integer conversion resulted in a change of sign
+                CANx->CAN_CFG_STAT |= 
+AN_CFG_STAT_SACK;
+Driver\src\SC32F11xx_can.c: 2 warnings, 0 errors
 linking...
-Program Size: Code=3812 RO-data=224 RW-data=8 ZI-data=1024  
-".\Objects\WDT_Test.axf" - 0 Error(s), 3 Warning(s).
+Program Size: Code=12348 RO-data=744 RW-data=112 ZI-data=2984  
+".\Objects\WDT_Test.axf" - 0 Error(s), 4 Warning(s).
 
 *** Performing Cross-Module-Optimization:
 compiling main.C...
 compiling Uart.c...
 compiling iap.c...
 C\iap.c(17): warning:  #61-D: integer operation result is out of range
-    IAP->IAP_CON |= IAP_CON_LOCK;
+    
+AP->IAP_CON |= 
+AP_CON_LOCK;
 C\iap.c(17): warning:  #68-D: integer conversion resulted in a change of sign
-    IAP->IAP_CON |= IAP_CON_LOCK;
+    
+AP->IAP_CON |= 
+AP_CON_LOCK;
 C\iap.c: 2 warnings, 0 errors
 compiling boot.c...
-compiling ota.c...
-C\ota.c(205): warning:  #177-D: variable "wordCount"  was declared but never referenced
-      uint32_t wordCount;
-C\ota.c: 1 warning, 0 errors
+compiling boot_can.c...
+compiling uds.c...
+compiling ota_flash.c...
+compiling lcd.c...
 compiling SC32F10xx_rcc.c...
 compiling SC32F10xx_gpio.c...
+compiling SC32F11xx_can.c...
+Driver\src\SC32F11xx_can.c(535): warning:  #61-D: integer operation result is out of range
+                CANx->CAN_CFG_STAT |= 
+AN_CFG_STAT_SACK;
+Driver\src\SC32F11xx_can.c(535): warning:  #68-D: integer conversion resulted in a change of sign
+                CANx->CAN_CFG_STAT |= 
+AN_CFG_STAT_SACK;
+Driver\src\SC32F11xx_can.c: 2 warnings, 0 errors
 linking...
-Program Size: Code=3812 RO-data=224 RW-data=8 ZI-data=1024  
+Program Size: Code=12348 RO-data=744 RW-data=112 ZI-data=2984  
 FromELF: creating hex file...
-".\Objects\WDT_Test.axf" - 0 Error(s), 3 Warning(s).
+".\Objects\WDT_Test.axf" - 0 Error(s), 4 Warning(s).
 *** Completed Cross-Module-Optimization after 2 iteration(s).
 
-<h2>Software Packages used:</h2>
-
-Package Vendor: ARM
-                http://www.keil.com/pack/ARM.CMSIS.5.8.0.pack
-                ARM.CMSIS.5.8.0
-                CMSIS (Common Microcontroller Software Interface Standard)
-
 <h2>Collection of Component include folders:</h2>
-  D:/KEIL5/ARM/CMSIS/5.8.0/Device/ARM/ARMCM0plus/Include
+  D:\CAN优化\BOOT\BOOT\RTE
+  D:\keil5\ARM\PACK\ARM\CMSIS\5.6.0\Device\ARM\ARMCM0plus\Include
 
 <h2>Collection of Component Files used:</h2>
-Build Time Elapsed:  00:00:05
+Build Time Elapsed:  00:00:16
 </pre>
 </body>
 </html>

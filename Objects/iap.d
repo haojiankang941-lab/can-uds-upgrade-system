@@ -1,6 +1,6 @@
 .\objects\iap.o: C\iap.c
 .\objects\iap.o: .\H\iap.h
-.\objects\iap.o: D:\KEIL5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\iap.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\iap.o: .\H\main.h
 .\objects\iap.o: .\H\W1251.h
 .\objects\iap.o: .\CMSIS\core_cm0plus.h
@@ -10,4 +10,4 @@
 .\objects\iap.o: .\CMSIS\mpu_armv7.h
 .\objects\iap.o: .\Driver\inc\SC32F10xx_rcc.h
 .\objects\iap.o: .\Driver\inc\SC32F10xx_gpio.h
-.\objects\iap.o: D:\KEIL5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\iap.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdio.h

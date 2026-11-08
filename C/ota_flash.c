@@ -13,8 +13,8 @@
 #include "iap.h"
 #include "W1251.h"
 
-#define OTA_SECTOR_SIZE   512U
-#define OTA_INFO_MAGIC    0xAA55AA55UL
+#define OTA_SECTOR_SIZE     512U
+#define OTA_INFO_CRC_BYTES  0x20U   /* info_crc covers offsets 0x00..0x1F */
 
 static uint8_t  s_stage[4];
 static uint32_t s_stage_addr;
@@ -58,10 +58,33 @@ static uint8_t RangeAllowed(uint32_t addr, uint32_t len)
 /* INFO                                                                       */
 /* -------------------------------------------------------------------------- */
 
+static uint32_t InfoCrc(void)
+{
+    return OTA_Crc32((const uint8_t *)INFO_ADDRESS, OTA_INFO_CRC_BYTES);
+}
+
 uint8_t OTA_CheckRequest(void)
 {
-    OTA_InfoTypeDef *info = (OTA_InfoTypeDef *)INFO_ADDRESS;
-    return (info->request_flag == OTA_INFO_MAGIC) ? 1U : 0U;
+    const OTA_InfoTypeDef *info = (const OTA_InfoTypeDef *)INFO_ADDRESS;
+    const uint32_t *req = (const uint32_t *)(INFO_ADDRESS + OTA_REQUEST_SECTOR);
+
+    if (*req == OTA_REQUEST_MAGIC)
+    {
+        return 1U;
+    }
+
+    /* Records written by older firmware kept the flag in INFO word 0. */
+    return (info->request_flag == OTA_REQUEST_MAGIC) ? 1U : 0U;
+}
+
+void OTA_RequestUpgrade(void)
+{
+    uint32_t addr = INFO_ADDRESS + OTA_REQUEST_SECTOR;
+
+    /* Only the request sector is erased: version/date/size/crc stay intact. */
+    IAP_SERASE(addr, FLASH_AREA_BASE);
+    Flash_Delay();
+    IAP_ProgramWord(addr, OTA_REQUEST_MAGIC);
 }
 
 uint8_t OTA_IsAppValid(void)
@@ -89,20 +112,87 @@ uint8_t OTA_IsAppValid(void)
     return 1U;
 }
 
-void OTA_SaveInfo(uint32_t version, uint32_t date, uint32_t size, uint32_t crc)
+uint8_t OTA_GetInfo(OTA_InfoTypeDef *out)
 {
-    uint32_t addr = INFO_ADDRESS;
+    const OTA_InfoTypeDef *info = (const OTA_InfoTypeDef *)INFO_ADDRESS;
 
-    /* Erase the whole INFO sector: all fields become 0, including
-     * request_flag, so the next boot jumps to APP. */
-    IAP_SERASE(addr, FLASH_AREA_BASE);
+    if (out == 0)
+    {
+        return 0U;
+    }
+
+    out->request_flag = info->request_flag;
+    out->version      = info->version;
+    out->date         = info->date;
+    out->size         = info->size;
+    out->crc          = info->crc;
+    out->magic        = info->magic;
+    out->staging      = info->staging;
+    out->committed    = info->committed;
+    out->info_crc     = info->info_crc;
+    out->flash_count  = info->flash_count;
+    out->last_result  = info->last_result;
+
+    if (out->size == 0U || out->size > BACKUP_SIZE)
+    {
+        return 0U;
+    }
+
+    /* Records written by older firmware have no magic word.  Their
+     * version/date/size/crc are still usable, just not integrity checked. */
+    if (out->magic != OTA_INFO_MAGIC)
+    {
+        return 1U;
+    }
+
+    if (out->info_crc != InfoCrc())
+    {
+        return 0U;
+    }
+
+    return (out->committed == OTA_INFO_COMMITTED) ? 1U : 0U;
+}
+
+void OTA_InfoStart(uint32_t version, uint32_t date, uint32_t size, uint32_t crc)
+{
+    const OTA_InfoTypeDef *info = (const OTA_InfoTypeDef *)INFO_ADDRESS;
+    uint32_t count = 0U;
+
+    if (info->magic == OTA_INFO_MAGIC && info->flash_count < 0xFFFFFFFEUL)
+    {
+        count = info->flash_count;
+    }
+
+    /* Erase the image record and the upgrade request together: from here on
+     * the old record is gone, so a power failure during the copy leaves
+     * INFO "staging" instead of claiming an image that is not there. */
+    IAP_SERASE(INFO_ADDRESS, FLASH_AREA_BASE);
+    Flash_Delay();
+    IAP_SERASE(INFO_ADDRESS + OTA_REQUEST_SECTOR, FLASH_AREA_BASE);
     Flash_Delay();
 
-    IAP_ProgramWord(addr + 4U,  version);
-    IAP_ProgramWord(addr + 8U,  date);
-    IAP_ProgramWord(addr + 12U, size);
-    IAP_ProgramWord(addr + 16U, crc);
-    /* addr + 0 (request_flag) is left at the erased value 0. */
+    IAP_ProgramWord(INFO_ADDRESS + 0x04U, version);
+    IAP_ProgramWord(INFO_ADDRESS + 0x08U, date);
+    IAP_ProgramWord(INFO_ADDRESS + 0x0CU, size);
+    IAP_ProgramWord(INFO_ADDRESS + 0x10U, crc);
+    IAP_ProgramWord(INFO_ADDRESS + 0x14U, OTA_INFO_MAGIC);
+    IAP_ProgramWord(INFO_ADDRESS + 0x18U, OTA_INFO_STAGING);
+    IAP_ProgramWord(INFO_ADDRESS + 0x24U, count + 1U);
+    /* 0x00, 0x1C, 0x20 and 0x28 stay at the erased value 0. */
+}
+
+void OTA_InfoFinish(uint32_t result)
+{
+    IAP_ProgramWord(INFO_ADDRESS + 0x28U, result);
+
+    if (result != OTA_RESULT_OK)
+    {
+        return;   /* info_crc stays 0, the record is not valid */
+    }
+
+    /* Order matters: info_crc covers the committed flag. */
+    IAP_ProgramWord(INFO_ADDRESS + 0x1CU, OTA_INFO_COMMITTED);
+    IAP_ProgramWord(INFO_ADDRESS + 0x20U, InfoCrc());
 }
 
 /* -------------------------------------------------------------------------- */
@@ -244,11 +334,16 @@ uint8_t OTA_Flash_CopyRange(uint32_t dst, uint32_t src, uint32_t len)
         return OTA_ERROR;
     }
 
+    /* Copy from the highest word down to word 0.  The stack pointer and the
+     * reset vector are the first two words of the image, so they are the
+     * last ones programmed: a power failure in the middle of the copy
+     * leaves SP = 0 and OTA_IsAppValid() refuses the image, keeping the ECU
+     * in the bootloader instead of entering a half-written application. */
     words = (len + 3U) / 4U;
-    for (i = 0; i < words; i++)
+    for (i = words; i > 0U; i--)
     {
-        uint32_t word = *(volatile uint32_t *)(src + i * 4U);
-        IAP_ProgramWord(dst + i * 4U, word);
+        uint32_t word = *(volatile uint32_t *)(src + (i - 1U) * 4U);
+        IAP_ProgramWord(dst + (i - 1U) * 4U, word);
     }
 
     return OTA_OK;

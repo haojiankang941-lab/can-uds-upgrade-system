@@ -460,6 +460,31 @@
               <FileType>5</FileType>
               <FilePath>.\H\ota_flash.h</FilePath>
             </File>
+            <File>
+              <FileName>lcd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\C\lcd.c</FilePath>
+            </File>
+            <File>
+              <FileName>lcd.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\H\lcd.h</FilePath>
+            </File>
+            <File>
+              <FileName>lcd_ui.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\C\lcd_ui.c</FilePath>
+            </File>
+            <File>
+              <FileName>lcd_ui.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\H\lcd_ui.h</FilePath>
+            </File>
+            <File>
+              <FileName>log.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\H\log.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

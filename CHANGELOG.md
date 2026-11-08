@@ -4,6 +4,70 @@
 
 ---
 
+## [Unreleased] - 2026-11-05
+
+### Added
+- SPI 状态屏：`C/lcd.c` / `H/lcd.h`
+  - ST7735S 128×160、4 线 SPI（SCK/MOSI/CS/DC，另加 RST），RGB565
+  - SPI0：SCK = PB8、MOSI = PB9；CS = PB13、DC = PB15、RST = PD8（普通 GPIO）
+  - SPI 时钟 8 MHz（SPR = 2，32 MHz / 4），模式 0，MSB first，8 位
+  - 初始化拆成状态机（复位/SWRESET/SLPOUT/DISPON 分步等待），主循环照常处理 CAN
+  - 直接写屏，无帧缓冲；5×8 ASCII 字库，支持 1×/2× 缩放
+  - 每个 SPI 字节带超时保护：屏幕未接时自动停用，不影响 UDS
+- 状态界面：`C/lcd_ui.c` / `H/lcd_ui.h`
+  - 显示 Boot 版本、编译日期、APP 版本/日期、UDS 状态、下载进度条与百分比、会话/安全状态、CAN ID
+  - 静态区逐项绘制 + 动态区 200 ms 节流刷新，只重画变化的行
+  - `Lcd_UiLongOp()`：擦除/复制前只重画状态行（约 2 ms），让 `ERASING` / `COPYING` 可见
+  - `Lcd_UiRefreshNow()`：`FF02` 成功后立即显示 `ACTIVATED`
+- 串口日志：`H/log.h`
+  - `BOOT_LOG_ENABLE` 默认 `0`；为 0 时 `LOG()` / `LOGF()` 编译为空，printf 不会链接
+  - `BOOT_LOG_BAUD` 默认 115200，仅在日志开启时生效
+  - 记录启动分支、会话切换、解锁、擦除、每 16 KB 下载进度、传输结束、CRC、复制/激活、所有非 `0x78` 负响应
+- `OTA_GetInfo()`：从 INFO 区读出 version/date/size/crc 供屏幕显示
+- `C/boot.h`：Bootloader 版本宏 `BOOT_VERSION_STR` / `BOOT_BUILD_DATE`、`BOOT_PART_NUMBER` / `BOOT_HW_VERSION_STR`
+- `H/uds.h`：`UdsUiStateTypeDef`、`UdsUiStatusTypeDef`、`Uds_GetUiStatus()`
+- **`0x22 ReadDataByIdentifier`**：默认会话即可读，无需解锁
+  - `0xF186` 当前会话、`0xF187` 零件号、`0xF189`/`0xF195` Boot 版本、`0xF191` 硬件版本
+  - `0x0100` Boot 版本号（major/minor/patch）、`0x0101` 编译日期
+  - `0x0102` APP 版本、`0x0103` APP 日期、`0x0104` APP 大小、`0x0105` APP CRC
+  - `0x0106` 刷写状态：记录有效位、状态（none/staging/committed）、刷写次数、上次结果
+  - 支持一次请求多个 DID，未知 DID 回 NRC `0x31`，超长回 NRC `0x14`
+- **`OTA_RequestUpgrade()`**：APP 请求升级的参考实现。只擦 `INFO_ADDRESS + 0x200` 这一个扇区并写入 `0xAA55AA55`，不再破坏版本/日期/CRC
+- **INFO 记录完整性**：新增 `magic`（`0x4F544149`）、`staging`/`committed` 状态字、`info_crc`（覆盖 `0x00..0x1F`）、`flash_count`、`last_result`
+- `OTA_InfoStart()` / `OTA_InfoFinish()`：把"写记录 → 复制 → 校验 → 提交"拆成两个阶段，中途掉电的记录不可信
+- `tools/uds_flash.py --info`：读取上述 DID 并以可读形式打印
+
+### Changed
+- `C/main.C`：进入 UDS 模式后初始化状态屏，主循环调用 `Lcd_UiPoll()`；加入启动/跳转日志
+- `C/boot.c`：日志开启时用 `BOOT_LOG_BAUD`（115200）初始化 UART0，关闭时仍为 9600
+- `C/uds.c`：在现有服务分支中维护 UI 状态快照；`FF02` 成功后的跳转等待由 20 ms 改为 `LCD_ACTIVATE_HOLD_MS`（300 ms）
+- `Test.uvprojx`：加入 `lcd.c`、`lcd_ui.c`、`lcd.h`、`lcd_ui.h`、`log.h`
+- **`31 01 FF02` 激活流程改为断电安全**：
+  1. 备份区 CRC 校验（失败直接 NEG，INFO 不动、APP 不擦）
+  2. `OTA_InfoStart()` 先写新镜像记录（staging）并清除升级请求
+  3. `OTA_Flash_CopyRange()` 复制 BACKUP → APP
+  4. 校验 APP CRC
+  5. `OTA_InfoFinish(OTA_RESULT_OK)` 写 committed + `info_crc`，记录才算有效
+- **`OTA_Flash_CopyRange()` 改为倒序复制**：从最高字往 0 地址写，向量表（栈指针 + 复位向量）最后落盘。中途掉电时 `OTA_IsAppValid()` 读到 SP=0，停留在 Boot 而不是跳进半写好的 APP
+- **INFO 布局扩展**：保留原来 0x00~0x10 的 5 个字段位置（旧记录仍可读），`0x14` 之后为新增字段；升级请求标志移到 `INFO_ADDRESS + 0x200` 的独立扇区，请求升级不再擦掉版本信息
+- `C/boot.h`：版本号提升为 `BOOT v1.1.0`
+
+### Fixed
+- `startup_w1251.s`：向量表里的 `CAN_IRQHandler` 未声明，汇编报 `A1516E`。按其它中断的写法补上 `EXPORT ... [WEAK]` 和默认处理函数；`boot_can.c` 中的强符号仍会覆盖它
+- `OTA_GetInfo()`：原实现只检查 `size` 范围，半写/擦除中断的记录也可能被判为有效。现在要求 `magic` + `info_crc` + `committed` 全部匹配；旧格式记录（无 magic）仍按原规则兼容
+
+### Notes
+- 屏幕只在进入 Bootloader 升级模式时初始化，正常启动直接跳 APP，不增加启动时间
+- 若显示错位或颜色异常，调整 `H/lcd.h` 的 `LCD_X_OFFSET` / `LCD_Y_OFFSET`，或修改 `C/lcd.c` 中 MADCTL 值（`0xC8`；红蓝反了用 `0xC0`，上下颠倒用 `0x00`，左右镜像用 `0xA8`）
+- 发布版必须保持 `BOOT_LOG_ENABLE = 0`，否则 printf 会占用额外 ROM
+- 实测占用（ARMCC V5.06，-O1）：日志关闭 Code 12348 + RO 744 ≈ 12.9 KB（含 RW 112），ZI 2984 ≈ 2.9 KB。仍在 Boot 区 16 KB / RAM 8 KB 以内
+- 断电保护边界：`34`~`FF01` 阶段 APP 完全不动，掉电只会丢备份区；从 `FF02` 开始 APP 会被擦除，因此**一旦进入 FF02，掉电后只能重新刷写**（此时备份区可能仍在，但 APP 已不完整，Boot 会拒绝跳转并停留在升级模式）
+- 升级请求标志在 `OTA_InfoStart()` 里清除（即 `FF02` 开始时）。如果 `FF02` 之前就放弃升级，标志会保留，下次上电仍进 Boot；这是为了掉电/断线后能直接重试
+- `0x22` 由 Bootloader 提供，所以只有在 Boot 模式（升级请求置位或 APP 无效）下才有响应；APP 若也需要被诊断读取版本，需在 APP 中实现同一套 DID
+- INFO 区使用两个 512 字节扇区：`INFO_ADDRESS`（镜像记录）和 `INFO_ADDRESS + 0x200`（升级请求），互不影响
+
+---
+
 ## [Unreleased] - 2026-11-03
 
 ### Added

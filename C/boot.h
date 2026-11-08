@@ -38,6 +38,20 @@
 #define RAM_BUFFER_SIZE      512U           /* RAM buffer 大小 (= 1 sector) */
 
 /* ================================================================
+ * 版本信息（显示在状态屏幕上）
+ * ================================================================ */
+
+#define BOOT_VERSION_MAJOR   1U
+#define BOOT_VERSION_MINOR   1U
+#define BOOT_VERSION_PATCH   0U
+#define BOOT_VERSION_STR     "BOOT v1.1.0"
+#define BOOT_BUILD_DATE      __DATE__
+
+/* Identification strings returned by 0x22 ReadDataByIdentifier. */
+#define BOOT_PART_NUMBER     "W1251-UDS-BOOT"
+#define BOOT_HW_VERSION_STR  "V1.0"
+
+/* ================================================================
  * 函数声明
  * ================================================================ */
 

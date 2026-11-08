@@ -1,0 +1,9 @@
+.\objects\sc32f11xx_can.o: Driver\src\SC32F11xx_can.c
+.\objects\sc32f11xx_can.o: .\Driver\inc\SC32F11xx_can.h
+.\objects\sc32f11xx_can.o: .\H\W1251.h
+.\objects\sc32f11xx_can.o: .\CMSIS\core_cm0plus.h
+.\objects\sc32f11xx_can.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\sc32f11xx_can.o: .\CMSIS\cmsis_version.h
+.\objects\sc32f11xx_can.o: .\CMSIS\cmsis_compiler.h
+.\objects\sc32f11xx_can.o: .\CMSIS\cmsis_armcc.h
+.\objects\sc32f11xx_can.o: .\CMSIS\mpu_armv7.h

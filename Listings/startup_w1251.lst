@@ -145,7 +145,7 @@ ARM Macro Assembler    Page 3
    92 000000A4 00000000        DCD              0           ; Reserved
    93 000000A8 00000000        DCD              0           ; Reserved
    94 000000AC 00000000        DCD              0           ; UCPD1/UCPD2 
-   95 000000B0 00000000        DCD              0           ; LED/LCD
+   95 000000B0 00000000        DCD              CAN_IRQHandler ; CAN
    96 000000B4 00000000        DCD              ADC_IRQHandler ; ADC
    97 000000B8 00000000        DCD              CMP_IRQHandler ; CMP
    98 000000BC 00000000        DCD              TK_IRQHandler 
@@ -287,74 +287,78 @@ EAK]
 [WEAK]
   185 0000001A                 EXPORT           TWI1_IRQHandler                
  [WEAK]
-  186 0000001A                 EXPORT           ADC_IRQHandler                 
+  186 0000001A                 EXPORT           CAN_IRQHandler                 
  [WEAK]
-  187 0000001A                 EXPORT           CMP_IRQHandler                 
+  187 0000001A                 EXPORT           ADC_IRQHandler                 
  [WEAK]
-  188 0000001A                 EXPORT           TK_IRQHandler                  
+  188 0000001A                 EXPORT           CMP_IRQHandler                 
  [WEAK]
-  189 0000001A         
-  190 0000001A         EXTI0_IRQHandler
-  191 0000001A         EXTI1_7_IRQHandler
-  192 0000001A         EXTI8_11_IRQHandler
-  193 0000001A         EXTI12_15_IRQHandler
-  194 0000001A         RCC_IRQHandler
-  195 0000001A         BTM_IRQHandler
-  196 0000001A         UART0_2_IRQHandler
-  197 0000001A         UART1_3_IRQHandler
-  198 0000001A         SPI0_IRQHandler
-  199 0000001A         SPI1_IRQHandler
-  200 0000001A         DMA0_IRQHandler
-  201 0000001A         DMA1_IRQHandler
-  202 0000001A         DMA2_IRQHandler
-  203 0000001A         DMA3_IRQHandler
-  204 0000001A         TIMER0_IRQHandler
-  205 0000001A         TIMER1_IRQHandler
-  206 0000001A         TIMER2_IRQHandler
-  207 0000001A         TIMER3_IRQHandler
-  208 0000001A         TIMER4_5_IRQHandler
-  209 0000001A         TIMER6_7_IRQHandler
-  210 0000001A         PWM0_IRQHandler
-  211 0000001A         TWI0_IRQHandler
-  212 0000001A         TWI1_IRQHandler
-  213 0000001A         ADC_IRQHandler
-  214 0000001A         CMP_IRQHandler
-  215 0000001A         TK_IRQHandler
-  216 0000001A         
-  217 0000001A E7FE            B                .
-  218 0000001C         
+  189 0000001A                 EXPORT           TK_IRQHandler                  
+ [WEAK]
+  190 0000001A         
+  191 0000001A         EXTI0_IRQHandler
+  192 0000001A         EXTI1_7_IRQHandler
+  193 0000001A         EXTI8_11_IRQHandler
+  194 0000001A         EXTI12_15_IRQHandler
+  195 0000001A         RCC_IRQHandler
+  196 0000001A         BTM_IRQHandler
+  197 0000001A         UART0_2_IRQHandler
+  198 0000001A         UART1_3_IRQHandler
+  199 0000001A         SPI0_IRQHandler
+  200 0000001A         SPI1_IRQHandler
+  201 0000001A         DMA0_IRQHandler
+  202 0000001A         DMA1_IRQHandler
+  203 0000001A         DMA2_IRQHandler
+  204 0000001A         DMA3_IRQHandler
+  205 0000001A         TIMER0_IRQHandler
+  206 0000001A         TIMER1_IRQHandler
+  207 0000001A         TIMER2_IRQHandler
+  208 0000001A         TIMER3_IRQHandler
+  209 0000001A         TIMER4_5_IRQHandler
+  210 0000001A         TIMER6_7_IRQHandler
+  211 0000001A         PWM0_IRQHandler
+  212 0000001A         TWI0_IRQHandler
+  213 0000001A         TWI1_IRQHandler
+  214 0000001A         CAN_IRQHandler
+  215 0000001A         ADC_IRQHandler
+  216 0000001A         CMP_IRQHandler
+  217 0000001A         TK_IRQHandler
 
 
 
 ARM Macro Assembler    Page 6 
 
 
-  219 0000001C                 ENDP
+  218 0000001A         
+  219 0000001A E7FE            B                .
   220 0000001C         
-  221 0000001C                 ALIGN
+  221 0000001C                 ENDP
   222 0000001C         
-  223 0000001C         ;*******************************************************
-                       ************************
-  224 0000001C         ; User Stack and Heap initialization
+  223 0000001C                 ALIGN
+  224 0000001C         
   225 0000001C         ;*******************************************************
                        ************************
-  226 0000001C                 IF               :DEF:__MICROLIB
-  227 0000001C         
-  228 0000001C                 EXPORT           __initial_sp
-  229 0000001C                 EXPORT           __heap_base
-  230 0000001C                 EXPORT           __heap_limit
-  231 0000001C         
-  232 0000001C                 ELSE
-  247                          ENDIF
-  248 0000001C         
-  249 0000001C                 END
+  226 0000001C         ; User Stack and Heap initialization
+  227 0000001C         ;*******************************************************
+                       ************************
+  228 0000001C                 IF               :DEF:__MICROLIB
+  229 0000001C         
+  230 0000001C                 EXPORT           __initial_sp
+  231 0000001C                 EXPORT           __heap_base
+  232 0000001C                 EXPORT           __heap_limit
+  233 0000001C         
+  234 0000001C                 ELSE
+  249                          ENDIF
+  250 0000001C         
+  251 0000001C                 END
               00000000 
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M0+ --apcs=inter
-work --depend=.\objects\startup_w1251.d -o.\objects\startup_w1251.o -ID:\KEIL5\
-ARM\CMSIS\5.8.0\Device\ARM\ARMCM0plus\Include --predefine="__MICROLIB SETA 1" -
--predefine="__UVISION_VERSION SETA 538" --predefine="ARMCM0P SETA 1" --list=.\l
-istings\startup_w1251.lst startup_w1251.s
+work --depend=.\objects\startup_w1251.d -o.\objects\startup_w1251.o -ID:\CAN”≈ª
+Ø\BOOT\BOOT\RTE -ID:\keil5\ARM\PACK\ARM\CMSIS\5.6.0\Device\ARM\ARMCM0plus\Inclu
+de -ID:\keil5\ARM\CMSIS\Include --predefine="__MICROLIB SETA 1" --predefine="__
+UVISION_VERSION SETA 518" --predefine="ARMCM0P SETA 1" --list=.\listings\startu
+p_w1251.lst startup_w1251.s
 
 
 
@@ -384,7 +388,7 @@ Symbol: __initial_sp
       At line 25 in file startup_w1251.s
    Uses
       At line 49 in file startup_w1251.s
-      At line 228 in file startup_w1251.s
+      At line 230 in file startup_w1251.s
 
 3 symbols
 
@@ -415,7 +419,7 @@ Symbol: __heap_base
    Definitions
       At line 35 in file startup_w1251.s
    Uses
-      At line 229 in file startup_w1251.s
+      At line 231 in file startup_w1251.s
 Comment: __heap_base used once
 __heap_limit 00000200
 
@@ -423,7 +427,7 @@ Symbol: __heap_limit
    Definitions
       At line 37 in file startup_w1251.s
    Uses
-      At line 230 in file startup_w1251.s
+      At line 232 in file startup_w1251.s
 Comment: __heap_limit used once
 4 symbols
 
@@ -477,16 +481,16 @@ ADC_IRQHandler 0000001A
 
 Symbol: ADC_IRQHandler
    Definitions
-      At line 213 in file startup_w1251.s
+      At line 215 in file startup_w1251.s
    Uses
       At line 96 in file startup_w1251.s
-      At line 186 in file startup_w1251.s
+      At line 187 in file startup_w1251.s
 
 BTM_IRQHandler 0000001A
 
 Symbol: BTM_IRQHandler
    Definitions
-      At line 195 in file startup_w1251.s
+      At line 196 in file startup_w1251.s
    Uses
       At line 73 in file startup_w1251.s
       At line 168 in file startup_w1251.s
@@ -500,27 +504,27 @@ Symbol: BusFault_Handler
       At line 54 in file startup_w1251.s
       At line 135 in file startup_w1251.s
 
+CAN_IRQHandler 0000001A
+
+Symbol: CAN_IRQHandler
+   Definitions
+      At line 214 in file startup_w1251.s
+   Uses
+      At line 95 in file startup_w1251.s
+      At line 186 in file startup_w1251.s
+
 CMP_IRQHandler 0000001A
 
 Symbol: CMP_IRQHandler
    Definitions
-      At line 214 in file startup_w1251.s
+      At line 216 in file startup_w1251.s
    Uses
       At line 97 in file startup_w1251.s
-      At line 187 in file startup_w1251.s
+      At line 188 in file startup_w1251.s
 
 DMA0_IRQHandler 0000001A
 
 Symbol: DMA0_IRQHandler
-   Definitions
-      At line 200 in file startup_w1251.s
-   Uses
-      At line 78 in file startup_w1251.s
-      At line 173 in file startup_w1251.s
-
-DMA1_IRQHandler 0000001A
-
-Symbol: DMA1_IRQHandler
    Definitions
       At line 201 in file startup_w1251.s
    Uses
@@ -530,6 +534,15 @@ Symbol: DMA1_IRQHandler
 ARM Macro Assembler    Page 2 Alphabetic symbol ordering
 Relocatable symbols
 
+      At line 78 in file startup_w1251.s
+      At line 173 in file startup_w1251.s
+
+DMA1_IRQHandler 0000001A
+
+Symbol: DMA1_IRQHandler
+   Definitions
+      At line 202 in file startup_w1251.s
+   Uses
       At line 79 in file startup_w1251.s
       At line 174 in file startup_w1251.s
 
@@ -537,7 +550,7 @@ DMA2_IRQHandler 0000001A
 
 Symbol: DMA2_IRQHandler
    Definitions
-      At line 202 in file startup_w1251.s
+      At line 203 in file startup_w1251.s
    Uses
       At line 80 in file startup_w1251.s
       At line 175 in file startup_w1251.s
@@ -546,7 +559,7 @@ DMA3_IRQHandler 0000001A
 
 Symbol: DMA3_IRQHandler
    Definitions
-      At line 203 in file startup_w1251.s
+      At line 204 in file startup_w1251.s
    Uses
       At line 81 in file startup_w1251.s
       At line 176 in file startup_w1251.s
@@ -572,7 +585,7 @@ EXTI0_IRQHandler 0000001A
 
 Symbol: EXTI0_IRQHandler
    Definitions
-      At line 190 in file startup_w1251.s
+      At line 191 in file startup_w1251.s
    Uses
       At line 67 in file startup_w1251.s
       At line 163 in file startup_w1251.s
@@ -580,15 +593,6 @@ Symbol: EXTI0_IRQHandler
 EXTI12_15_IRQHandler 0000001A
 
 Symbol: EXTI12_15_IRQHandler
-   Definitions
-      At line 193 in file startup_w1251.s
-   Uses
-      At line 70 in file startup_w1251.s
-      At line 166 in file startup_w1251.s
-
-EXTI1_7_IRQHandler 0000001A
-
-Symbol: EXTI1_7_IRQHandler
 
 
 
@@ -596,7 +600,16 @@ ARM Macro Assembler    Page 3 Alphabetic symbol ordering
 Relocatable symbols
 
    Definitions
-      At line 191 in file startup_w1251.s
+      At line 194 in file startup_w1251.s
+   Uses
+      At line 70 in file startup_w1251.s
+      At line 166 in file startup_w1251.s
+
+EXTI1_7_IRQHandler 0000001A
+
+Symbol: EXTI1_7_IRQHandler
+   Definitions
+      At line 192 in file startup_w1251.s
    Uses
       At line 68 in file startup_w1251.s
       At line 164 in file startup_w1251.s
@@ -605,7 +618,7 @@ EXTI8_11_IRQHandler 0000001A
 
 Symbol: EXTI8_11_IRQHandler
    Definitions
-      At line 192 in file startup_w1251.s
+      At line 193 in file startup_w1251.s
    Uses
       At line 69 in file startup_w1251.s
       At line 165 in file startup_w1251.s
@@ -641,10 +654,16 @@ PWM0_IRQHandler 0000001A
 
 Symbol: PWM0_IRQHandler
    Definitions
-      At line 210 in file startup_w1251.s
+      At line 211 in file startup_w1251.s
    Uses
       At line 88 in file startup_w1251.s
       At line 183 in file startup_w1251.s
+
+
+
+ARM Macro Assembler    Page 4 Alphabetic symbol ordering
+Relocatable symbols
+
 
 PendSV_Handler 00000016
 
@@ -655,17 +674,11 @@ Symbol: PendSV_Handler
       At line 63 in file startup_w1251.s
       At line 153 in file startup_w1251.s
 
-
-
-ARM Macro Assembler    Page 4 Alphabetic symbol ordering
-Relocatable symbols
-
-
 RCC_IRQHandler 0000001A
 
 Symbol: RCC_IRQHandler
    Definitions
-      At line 194 in file startup_w1251.s
+      At line 195 in file startup_w1251.s
    Uses
       At line 71 in file startup_w1251.s
       At line 167 in file startup_w1251.s
@@ -683,7 +696,7 @@ SPI0_IRQHandler 0000001A
 
 Symbol: SPI0_IRQHandler
    Definitions
-      At line 198 in file startup_w1251.s
+      At line 199 in file startup_w1251.s
    Uses
       At line 76 in file startup_w1251.s
       At line 171 in file startup_w1251.s
@@ -692,7 +705,7 @@ SPI1_IRQHandler 0000001A
 
 Symbol: SPI1_IRQHandler
    Definitions
-      At line 199 in file startup_w1251.s
+      At line 200 in file startup_w1251.s
    Uses
       At line 77 in file startup_w1251.s
       At line 172 in file startup_w1251.s
@@ -710,6 +723,12 @@ SysTick_Handler 00000018
 
 Symbol: SysTick_Handler
    Definitions
+
+
+
+ARM Macro Assembler    Page 5 Alphabetic symbol ordering
+Relocatable symbols
+
       At line 156 in file startup_w1251.s
    Uses
       At line 64 in file startup_w1251.s
@@ -719,13 +738,7 @@ TIMER0_IRQHandler 0000001A
 
 Symbol: TIMER0_IRQHandler
    Definitions
-
-
-
-ARM Macro Assembler    Page 5 Alphabetic symbol ordering
-Relocatable symbols
-
-      At line 204 in file startup_w1251.s
+      At line 205 in file startup_w1251.s
    Uses
       At line 82 in file startup_w1251.s
       At line 177 in file startup_w1251.s
@@ -734,7 +747,7 @@ TIMER1_IRQHandler 0000001A
 
 Symbol: TIMER1_IRQHandler
    Definitions
-      At line 205 in file startup_w1251.s
+      At line 206 in file startup_w1251.s
    Uses
       At line 83 in file startup_w1251.s
       At line 178 in file startup_w1251.s
@@ -743,7 +756,7 @@ TIMER2_IRQHandler 0000001A
 
 Symbol: TIMER2_IRQHandler
    Definitions
-      At line 206 in file startup_w1251.s
+      At line 207 in file startup_w1251.s
    Uses
       At line 84 in file startup_w1251.s
       At line 179 in file startup_w1251.s
@@ -752,7 +765,7 @@ TIMER3_IRQHandler 0000001A
 
 Symbol: TIMER3_IRQHandler
    Definitions
-      At line 207 in file startup_w1251.s
+      At line 208 in file startup_w1251.s
    Uses
       At line 85 in file startup_w1251.s
       At line 180 in file startup_w1251.s
@@ -761,7 +774,7 @@ TIMER4_5_IRQHandler 0000001A
 
 Symbol: TIMER4_5_IRQHandler
    Definitions
-      At line 208 in file startup_w1251.s
+      At line 209 in file startup_w1251.s
    Uses
       At line 86 in file startup_w1251.s
       At line 181 in file startup_w1251.s
@@ -770,19 +783,10 @@ TIMER6_7_IRQHandler 0000001A
 
 Symbol: TIMER6_7_IRQHandler
    Definitions
-      At line 209 in file startup_w1251.s
+      At line 210 in file startup_w1251.s
    Uses
       At line 87 in file startup_w1251.s
       At line 182 in file startup_w1251.s
-
-TK_IRQHandler 0000001A
-
-Symbol: TK_IRQHandler
-   Definitions
-      At line 215 in file startup_w1251.s
-   Uses
-      At line 98 in file startup_w1251.s
-      At line 188 in file startup_w1251.s
 
 
 
@@ -790,11 +794,20 @@ Symbol: TK_IRQHandler
 ARM Macro Assembler    Page 6 Alphabetic symbol ordering
 Relocatable symbols
 
+TK_IRQHandler 0000001A
+
+Symbol: TK_IRQHandler
+   Definitions
+      At line 217 in file startup_w1251.s
+   Uses
+      At line 98 in file startup_w1251.s
+      At line 189 in file startup_w1251.s
+
 TWI0_IRQHandler 0000001A
 
 Symbol: TWI0_IRQHandler
    Definitions
-      At line 211 in file startup_w1251.s
+      At line 212 in file startup_w1251.s
    Uses
       At line 90 in file startup_w1251.s
       At line 184 in file startup_w1251.s
@@ -803,7 +816,7 @@ TWI1_IRQHandler 0000001A
 
 Symbol: TWI1_IRQHandler
    Definitions
-      At line 212 in file startup_w1251.s
+      At line 213 in file startup_w1251.s
    Uses
       At line 91 in file startup_w1251.s
       At line 185 in file startup_w1251.s
@@ -812,7 +825,7 @@ UART0_2_IRQHandler 0000001A
 
 Symbol: UART0_2_IRQHandler
    Definitions
-      At line 196 in file startup_w1251.s
+      At line 197 in file startup_w1251.s
    Uses
       At line 74 in file startup_w1251.s
       At line 169 in file startup_w1251.s
@@ -821,7 +834,7 @@ UART1_3_IRQHandler 0000001A
 
 Symbol: UART1_3_IRQHandler
    Definitions
-      At line 197 in file startup_w1251.s
+      At line 198 in file startup_w1251.s
    Uses
       At line 75 in file startup_w1251.s
       At line 170 in file startup_w1251.s
@@ -835,7 +848,7 @@ Symbol: UsageFault_Handler
       At line 55 in file startup_w1251.s
       At line 140 in file startup_w1251.s
 
-38 symbols
+39 symbols
 
 
 
@@ -890,4 +903,4 @@ Symbol: __main
       At line 113 in file startup_w1251.s
 Comment: __main used once
 2 symbols
-388 symbols in table
+389 symbols in table

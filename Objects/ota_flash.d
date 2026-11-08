@@ -1,0 +1,11 @@
+.\objects\ota_flash.o: C\ota_flash.c
+.\objects\ota_flash.o: .\H\ota_flash.h
+.\objects\ota_flash.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\ota_flash.o: C\boot.h
+.\objects\ota_flash.o: .\H\iap.h
+.\objects\ota_flash.o: .\H\W1251.h
+.\objects\ota_flash.o: .\CMSIS\core_cm0plus.h
+.\objects\ota_flash.o: .\CMSIS\cmsis_version.h
+.\objects\ota_flash.o: .\CMSIS\cmsis_compiler.h
+.\objects\ota_flash.o: .\CMSIS\cmsis_armcc.h
+.\objects\ota_flash.o: .\CMSIS\mpu_armv7.h

@@ -1,21 +1,31 @@
-;#<FEEDBACK># ARM Linker, 5060960: Last Updated: Thu Jul 16 17:34:36 2026
+;#<FEEDBACK># ARM Linker, 5060061: Last Updated: Thu Nov 05 19:52:31 2026
 ;VERSION 0.2
 ;FILE boot.o
 __asm___6_boot_c_0faa32af____REV16 <= USED 0
 __asm___6_boot_c_0faa32af____REVSH <= USED 0
+;FILE boot_can.o
+__asm___10_boot_can_c_Tx_msg____REV16 <= USED 0
+__asm___10_boot_can_c_Tx_msg____REVSH <= USED 0
 ;FILE iap.o
 IAP_EraseAll <= USED 0
 IAP_TestMode <= USED 0
 __asm___5_iap_c_14fd2dba____REV16 <= USED 0
 __asm___5_iap_c_14fd2dba____REVSH <= USED 0
 jump_to_BOOT <= USED 0
+;FILE isotp.o
+;FILE lcd.o
+Lcd_Fill <= USED 0
+__asm___5_lcd_c_7eca24f7____REV16 <= USED 0
+__asm___5_lcd_c_7eca24f7____REVSH <= USED 0
+;FILE lcd_ui.o
 ;FILE main.o
 __asm___6_main_C_a9c8fbbb____REV16 <= USED 0
 __asm___6_main_C_a9c8fbbb____REVSH <= USED 0
-;FILE ota.o
-OTA_CheckRequest <= USED 0
-__asm___5_ota_c_a18b1abf____REV16 <= USED 0
-__asm___5_ota_c_a18b1abf____REVSH <= USED 0
+;FILE ota_flash.o
+OTA_Flash_Verify <= USED 0
+OTA_RequestUpgrade <= USED 0
+__asm___11_ota_flash_c_a18b1abf____REV16 <= USED 0
+__asm___11_ota_flash_c_a18b1abf____REVSH <= USED 0
 ;FILE sc32f10xx_gpio.o
 GPIO_DeInit <= USED 0
 GPIO_ReadInputDataBit <= USED 0
@@ -28,7 +38,6 @@ GPIOx_Write <= USED 0
 __asm___16_SC32F10xx_gpio_c_f8e8e39a____REV16 <= USED 0
 __asm___16_SC32F10xx_gpio_c_f8e8e39a____REVSH <= USED 0
 ;FILE sc32f10xx_rcc.o
-RCC_AHBPeriphClockCmd <= USED 0
 RCC_AHBPeriphResetCmd <= USED 0
 RCC_APB0KConfig <= USED 0
 RCC_APB0PeriphResetCmd <= USED 0
@@ -55,8 +64,24 @@ RCC_SYSCLKConfig <= USED 0
 RCC_SystickCLKConfig <= USED 0
 __asm___15_SC32F10xx_rcc_c_49e27980____REV16 <= USED 0
 __asm___15_SC32F10xx_rcc_c_49e27980____REVSH <= USED 0
+;FILE sc32f11xx_can.o
+CAN_ClearFlag <= USED 0
+CAN_FastBaud_Config <= USED 0
+CAN_GetFlagStatus <= USED 0
+CAN_Recieve_Config <= USED 0
+CAN_RxThresholdConfig <= USED 0
+CAN_SlowBaud_Config <= USED 0
+CAN_Trans_Init <= USED 0
+__asm___15_SC32F11xx_can_c_CAN_Init____REV16 <= USED 0
+__asm___15_SC32F11xx_can_c_CAN_Init____REVSH <= USED 0
 ;FILE startup_w1251.o
 ;FILE uart.o
 Delay <= USED 0
+Uart_GetByte <= USED 0
+Uart_SendByte <= USED 0
 __asm___6_Uart_c_18154c62____REV16 <= USED 0
 __asm___6_Uart_c_18154c62____REVSH <= USED 0
+fputc <= USED 0
+;FILE uds.o
+__asm___5_uds_c_Uds_Init____REV16 <= USED 0
+__asm___5_uds_c_Uds_Init____REVSH <= USED 0

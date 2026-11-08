@@ -1,0 +1,11 @@
+.\objects\lcd.o: C\lcd.c
+.\objects\lcd.o: .\H\lcd.h
+.\objects\lcd.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\lcd.o: .\H\boot_can.h
+.\objects\lcd.o: .\H\W1251.h
+.\objects\lcd.o: .\CMSIS\core_cm0plus.h
+.\objects\lcd.o: .\CMSIS\cmsis_version.h
+.\objects\lcd.o: .\CMSIS\cmsis_compiler.h
+.\objects\lcd.o: .\CMSIS\cmsis_armcc.h
+.\objects\lcd.o: .\CMSIS\mpu_armv7.h
+.\objects\lcd.o: .\Driver\inc\SC32F10xx_rcc.h

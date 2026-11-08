@@ -10,9 +10,12 @@ Minimal UDS flashing client for the CAN bootloader (0x7E0 / 0x7E8).
     # 刷写固件
     python uds_flash.py -i pcan -c PCAN_USBBUS1 -f app.bin --version 0x00010002 --date 0x20261103
 
+    # 读取 Boot/APP 版本与刷写状态（0x22，默认会话即可）
+    python uds_flash.py -i pcan -c PCAN_USBBUS1 --info
+
     # 只发一条原始 UDS 请求（自动 ISO-TP 分段）
     python uds_flash.py -i pcan -c PCAN_USBBUS1 --raw "10 02"
-    python uds_flash.py -i pcan -c PCAN_USBBUS1 --raw "22 F1 90"
+    python uds_flash.py -i pcan -c PCAN_USBBUS1 --raw "22 01 02"
 
 流程:
     10 02 -> 27 01/02 -> 34 -> 36... -> 37 -> 31 01 FF01 -> 31 01 FF02
@@ -362,6 +365,57 @@ def raw_request(bus, text):
 
 
 # ---------------------------------------------------------------------------
+# 0x22 ReadDataByIdentifier
+# ---------------------------------------------------------------------------
+
+DIDS = (
+    (0x0100, "boot version", "version"),
+    (0x0101, "boot build date", "ascii"),
+    (0x0102, "app version", "hex32"),
+    (0x0103, "app date", "hex32"),
+    (0x0104, "app size", "int"),
+    (0x0105, "app crc", "hex32"),
+    (0x0106, "flash status", "status"),
+    (0xF186, "active session", "hex"),
+    (0xF187, "part number", "ascii"),
+    (0xF189, "sw version", "ascii"),
+    (0xF191, "hw version", "ascii"),
+)
+
+
+def _format_did(kind, data):
+    if kind == "ascii":
+        return data.rstrip(b"\x00").decode("ascii", "replace")
+    if not data:
+        return "(empty)"
+    if kind == "int":
+        return "%d" % int.from_bytes(data, "little")
+    if kind == "hex32":
+        return "0x%08X" % int.from_bytes(data, "little")
+    if kind == "version" and len(data) >= 3:
+        return "%d.%d.%d" % (data[0], data[1], data[2])
+    if kind == "status" and len(data) >= 10:
+        states = {0: "none", 1: "staging", 2: "committed"}
+        state = states.get(data[1], "0x%02X" % data[1])
+        return ("record_valid=%d state=%s flash_count=%d last_result=0x%08X"
+                % (data[0], state,
+                   int.from_bytes(data[2:6], "little"),
+                   int.from_bytes(data[6:10], "little")))
+    return data.hex(" ").upper()
+
+
+def read_info(bus):
+    """读取 Boot/APP 版本、刷写状态（默认会话即可，无需解锁）。"""
+    tp = IsoTpClient(bus)
+    for did, name, kind in DIDS:
+        resp = tp.request(bytes([0x22, did >> 8, did & 0xFF]), timeout=2.0)
+        if not resp or resp[0] != 0x62:
+            print("  %04X %-16s %s" % (did, name, resp.hex(" ").upper()))
+            continue
+        print("  %04X %-16s %s" % (did, name, _format_did(kind, resp[3:])))
+
+
+# ---------------------------------------------------------------------------
 # main
 # ---------------------------------------------------------------------------
 
@@ -384,10 +438,12 @@ def main(argv=None):
     parser.add_argument("--date", type=parse_int, default=0,
                         help="INFO date word, little-endian (default 0)")
     parser.add_argument("--raw", help="send one raw UDS request, e.g. \"3E 00\"")
+    parser.add_argument("--info", action="store_true",
+                        help="read boot/app version and flash status via 0x22")
     args = parser.parse_args(argv)
 
-    if not args.file and not args.raw:
-        parser.error("需要 -f <bin> 或 --raw <hex>")
+    if not args.file and not args.raw and not args.info:
+        parser.error("需要 -f <bin>、--raw <hex> 或 --info")
 
     bus_kwargs = {"interface": args.interface, "bitrate": args.bitrate}
     if args.channel:
@@ -402,6 +458,8 @@ def main(argv=None):
     try:
         if args.raw:
             raw_request(bus, args.raw)
+        elif args.info:
+            read_info(bus)
         else:
             flash(args.file, bus, args.version, args.date)
     except (IsoTpError, UdsError) as exc:

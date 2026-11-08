@@ -183,6 +183,7 @@ Default_Handler PROC
 				EXPORT  PWM0_IRQHandler               	[WEAK]
 				EXPORT  TWI0_IRQHandler               	[WEAK]
 				EXPORT  TWI1_IRQHandler                 [WEAK]
+				EXPORT  CAN_IRQHandler                  [WEAK]
 				EXPORT  ADC_IRQHandler                  [WEAK]
 				EXPORT  CMP_IRQHandler                  [WEAK]
 				EXPORT  TK_IRQHandler                   [WEAK]
@@ -210,6 +211,7 @@ TIMER6_7_IRQHandler
 PWM0_IRQHandler
 TWI0_IRQHandler
 TWI1_IRQHandler
+CAN_IRQHandler
 ADC_IRQHandler
 CMP_IRQHandler
 TK_IRQHandler
